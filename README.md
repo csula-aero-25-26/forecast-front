@@ -2,9 +2,12 @@
 
 Modified Template for CSULA X Aerospace Senior Design 2025-2026 – built with **React** and **Bootstrap 5**.
 
+
 ## Component Purpose 
 This project is part of the **CSULA Aerospace Senior Design Team (Fall 2025)**.  
 This repository is meant to work in tandem with the forecast-model and [] repositiories as their frontend page. Working to display the data in such a way that allows for user input. 
+
+
 
 ## Getting Started
 
@@ -22,6 +25,9 @@ npm install
 ```
 npm run dev
 ```
+
+## Style Guide
+![alt text](https://github.com/forecast-front/docs/assets/readme_style_sheet.png)
 
 
 ## About
