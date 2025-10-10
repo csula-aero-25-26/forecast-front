@@ -1,6 +1,6 @@
 # CSULA Aerospace Senior Design – F10.7 Solar Flux Forecasting
 
-Modified Template for CSULA X Aerospace Senior Design 2025-2026 – built with **React** and **Bootstrap 5**.
+Webpage from modified template for CSULA X Aerospace Senior Design 2025-2026 – built with **React** and **Bootstrap 5**.
 
 
 ## Component Purpose 
@@ -25,6 +25,16 @@ npm install
 ```
 npm run dev
 ```
+
+## Layout
+
+
+1. Landing Page
+[]
+3. Meet The Team
+[]
+3. Model Visualization 
+[]
 
 ## Style Guide
 ![image alt](https://github.com/csula-aero-25-26/forecast-front/blob/8837715a8b3c95e9ecc6d2cbb798464e93b4cebf/docs/assets/readme_style_sheet.png)
