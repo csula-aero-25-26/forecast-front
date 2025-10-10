@@ -1,0 +1,31 @@
+{
+    "name": "Team 10",
+    "profilePictureUrl": "images/pictures/pfp.png",
+    "resumePdfUrl": "",
+    "statusCircleVisible": true,
+    "statusCircleVariant": "available",
+    "statusCircleHoverMessage": "status_message_available_for_freelance",
+    "locales": {
+        "en": {
+            "localized_name": "Team 10",
+            "localized_name_stylized": "<strong>Team {{10}}</strong>",
+            "status_message_available_for_freelance": "Available for freelance!",
+            "roles": [
+                "Advisor: Zilong Ye",
+                "Student Members: ",
+                "Joshua Hanscom",
+                "Rizza Barnwell",
+                "Daniel Gomez",
+                "Daniel Herrera",
+                "Weihao Liu",
+                "Emily Lopez",
+                "Troy Rana",
+                "Fabricio Reyes",
+                "Maro Rodriguez",
+                "Andy Voong"
+            ],
+            "name_pronunciation_ipa": "",
+            "name_pronunciation_audio_url": ""
+        }
+    }
+}

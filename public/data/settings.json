@@ -1,0 +1,80 @@
+{
+    "developerSettings": {
+        "debugMode": false,
+        "fakeEmailRequests": false,
+        "stayOnThePreloaderScreen": false,
+        "version": "1.0.0"
+    },
+    "preloaderSettings": {
+        "enabled": true,
+        "title": "CSULA X Aerospace",
+        "subtitle": "<b style='margine-center:3px'>Senior Design 2025-2026</b>",
+        "logoOffset": {
+            "right": 14,
+            "top": 2,
+            "bottom": -10
+        }
+    },
+    "templateSettings": {
+        "animatedCursorEnabled": true,
+        "backgroundStyle": "animated",
+        "defaultLanguageId": "en",
+        "defaultThemeId": "dark",
+        "fullscreenEnabled": true,
+        "showSpinnerOnThemeChange": false
+    },
+    "supportedLanguages": [
+        {
+            "name": "English",
+            "id": "en",
+            "flagUrl": "images/flags/en-us.png"
+        }
+    ],
+    "supportedThemes": [
+        {
+            "id": "dark",
+            "icon": "fa-solid fa-moon",
+            "dark": true,
+            "locales": {
+                "en": {
+                    "name": "Dark Mode"
+                },
+                "es": {
+                    "name": "Modo Oscuro"
+                }
+            }
+        },
+        {
+            "id": "light",
+            "icon": "fa-solid fa-sun",
+            "dark": false,
+            "locales": {
+                "en": {
+                    "name": "Light Mode"
+                },
+                "es": {
+                    "name": "Modo Claro"
+                }
+            }
+        }
+    ],
+    "consoleMessageForDevelopers": {
+        "title": "🖥️ Hey there, fellow developer!",
+        "items": [
+            {
+                "description": "This is an open-source template based on the React framework.",
+                "list": [],
+                "listStyle": "none"
+            },
+            {
+                "description": "Like what you see? Let's connect!",
+                "list": [
+                    "GitHub: https://github.com/username",
+                    "Website: https://website.com"
+                ],
+                "listStyle": "bulleted"
+            }
+        ]
+    },
+    "imagesToCache": []
+}
