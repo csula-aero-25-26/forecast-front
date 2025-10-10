@@ -27,8 +27,7 @@ npm run dev
 ```
 
 ## Style Guide
-![alt text](https://github.com/forecast-front/docs/assets/readme_style_sheet.png)
-
+![image alt](https://github.com/csula-aero-25-26/forecast-front/blob/8837715a8b3c95e9ecc6d2cbb798464e93b4cebf/docs/assets/readme_style_sheet.png)
 
 ## About
 
