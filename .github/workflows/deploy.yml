@@ -1,37 +1,37 @@
-name: Deploy portfolio to GitHub Pages
+# name: Deploy portfolio to GitHub Pages
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
+#     steps:
+#       # Checkout the repository
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      # Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+#       # Setup Node.js
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 18
 
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
+#       # Install dependencies
+#       - name: Install dependencies
+#         run: npm install
 
-      # Build the project
-      - name: Build project
-        run: npm run build
+#       # Build the project
+#       - name: Build project
+#         run: npm run build
 
-      # Deploy to GitHub pages
-      - name: Deploy to GitHub pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+#       # Deploy to GitHub pages
+#       - name: Deploy to GitHub pages
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_dir: dist
