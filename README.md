@@ -11,6 +11,11 @@ This repository is meant to work in tandem with the forecast-model and [] reposi
 
 ## Getting Started
 
+0. Have Node.js installed on your machine
+```
+=Throw it into Google and install the most recent version
+```
+
 1. Clone the repo:
 ```
 git clone https://github.com/csula-aero-25-26/forecast-front
