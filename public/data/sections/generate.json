@@ -1,0 +1,13 @@
+{
+    "title": {
+        "locales": {
+            "en": {
+                "title_short": "Generation",
+                "title_short_nav": "Graph Generation",
+                "title_long_prefix": "This is where you",
+                "title_long": "Generate {{Graph}}"
+            }
+        }
+    },
+    "articles": []
+}

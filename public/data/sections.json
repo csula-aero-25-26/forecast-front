@@ -1,21 +1,21 @@
 {
     "sections": [
         {
-            "id": "about",
+            "id": "overview",
             "categoryId": "home",
-            "jsonPath": "/data/sections/cover.json",
+            "jsonPath": "/data/sections/overview.json",
             "faIcon": "fa-solid fa-address-card"
         },
         {
-            "id": "skills",
+            "id": "param",
             "categoryId": "showcase",
-            "jsonPath": "/data/sections/skills.json",
+            "jsonPath": "/data/sections/param.json",
             "faIcon": "fa-solid fa-tools"
         },
         {
-            "id": "experience",
+            "id": "generate",
             "categoryId": "background",
-            "jsonPath": "/data/sections/experience.json",
+            "jsonPath": "/data/sections/generate.json",
             "faIcon": "fa-solid fa-briefcase"
         },
         {

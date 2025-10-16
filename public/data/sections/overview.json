@@ -1,0 +1,57 @@
+{
+    "title": {
+        "locales": {
+            "en": {
+                "title_short": "Overview",
+                "title_short_nav": "Project Overview",
+                "title_long_prefix": "This is our",
+                "title_long": "Project {{Overview}}"
+            }
+        }
+    },
+    "articles": [
+{
+    "id": 1,
+    "component": "ArticleTimeline",
+    "locales": {
+        "en": {
+            "title": ""
+        }
+    },
+    "settings": {
+        "order_items_by": "dateStart",
+        "order_items_sort": "desc"
+    },
+    "items": [
+        {
+            "id": 1,
+            "img": "",
+            "faIcon": "fa-solid fa-paperclip",
+            "faIconColors": {"bg": "#000", "bgLight": "#000", "fill": "#FFF", "fillLight": "#FFF"},
+            "locales": {
+                "en": {
+                    "title": "{{Summary}}",
+                    "text": "Lorem Ipsum"
+                }
+            }
+        },
+
+        {
+            "id": 2,
+            "img": "",
+            "faIcon": "fa-solid fa-file",
+            "faIconColors": {"bg": "#000", "bgLight": "#000", "fill": "#FFF", "fillLight": "#FFF"},
+            "locales": {
+                "en": {
+                    "title": "{{Proposal}}",
+                    "text": "<p><u>Objective</u>: Develop a new machine learning/AI forecast of the solar radio flux (F10.7) index</p> <p><u>Description</u>: The solar radio flux at 10.7 cm (F10.7) is a useful geomagnetic index that correlates to solar activity. This index is used by several space weather models including models that predict atmospheric density and consequently satellite drag. Here, we propose develop a machine learning forecast of F10.7 out to a forecast horizon of at least 7 days. The index is correlated with several other space environment observables and has a long dataset of potential input data going back decades.</p><p><u>Expected Outcome</u>: The results from the new machine learning model can be integrated into several space weather decision tools, allowing for better prediction of space environment hazards and satellite drag estimations. If novel machine learning techniques are employed, these can be utilized in other space weather forecast models under development.</p>"
+                }
+            }
+        }
+    ]
+}
+
+
+        
+    ]
+}

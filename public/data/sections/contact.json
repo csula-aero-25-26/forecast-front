@@ -2,12 +2,67 @@
     "title": {
         "locales": {
             "en": {
-                "title_short": "Overview",
-                "title_short_nav": "Project Overview",
+                "title_short": "Team",
+                "title_short_nav": "Meet The Team",
                 "title_long_prefix": "Our",
-                "title_long": "Project {{Overview}}"
+                "title_long": "{{Team}}"
             }
         }
     },
-    "articles": []
+    "articles": [
+        {
+    "id": 1,
+    "component": "ArticleText",
+    "locales": {
+        "en": {"title": ""}
+    },
+    "settings": {
+        "order_items_by": "id",
+        "order_items_sort": "asc"
+    },
+    "items": [
+        {
+            "id": 1,
+            "img": "/data/images/content/Front/Weihao.jpg",
+            "locales": {
+                "en": {
+                    "text": "<p>{{Weihao Liu}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
+                }
+            }
+        },
+
+        {
+            "id": 2,
+            "img": "/data/images/content/Front/Emily.jpg",
+            "locales": {
+                "en": {
+                    "text": "<p>{{Emily Lopez}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
+                }
+            }
+        },
+
+        {
+            "id": 3,
+            "img": "/data/images/content/Front/Troy.png",
+            "locales": {
+                "en": {
+                    "text": "<p>{{Troy Rana}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
+                }
+            }
+        },
+
+        {
+            "id": 2,
+            "img": "/data/images/content/Front/Andy.jpg",
+            "locales": {
+                "en": {
+                    "text": "<p>{{Andy Voong}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
+                }
+            }
+        }
+
+    ]
 }
+    ]
+}
+
