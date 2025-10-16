@@ -1,8 +1,8 @@
 {
     "name": "Team 10",
-    "profilePictureUrl": "images/pictures/pfp.png",
+    "profilePictureUrl": "images/content/pfp.png",
     "resumePdfUrl": "",
-    "statusCircleVisible": true,
+    "statusCircleVisible": false,
     "statusCircleVariant": "available",
     "statusCircleHoverMessage": "status_message_available_for_freelance",
     "locales": {
