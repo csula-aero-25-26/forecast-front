@@ -13,7 +13,7 @@ This repository is meant to work in tandem with the forecast-model and [] reposi
 
 0. Have Node.js installed on your machine
 ```
-=Throw it into Google and install the most recent version
+Google the most recent version and follow the installation wizard. 
 ```
 
 1. Clone the repo:
@@ -46,9 +46,7 @@ npm run dev
 
 ## About
 
-This template was modified by and maintained by **Weihao Liu, Emily Lopez. Troy Rana, and Andy Voong**.
+This template was modified by and maintained by **Weihao Liu, Emily Lopez, Troy Rana, and Andy Voong**.
 
-This template was created by and is maintained by **[Ryan Balieiro](https://ryanbalieiro.com/)**.
-
-
-It's based on the **[React](https://reactjs.org/)** framework created by Jordan Walke, and the **[Bootstrap](https://getbootstrap.com/)** framework created by Mark Otto and Jacob Thorton.
+The original template was created by and is maintained by **[Ryan Balieiro](https://ryanbalieiro.com/)**. 
+The template is based on the **[React](https://reactjs.org/)** framework created by Jordan Walke, and the **[Bootstrap](https://getbootstrap.com/)** framework created by Mark Otto and Jacob Thorton.
