@@ -44,6 +44,9 @@ npm run dev
 ## Style Guide
 ![image alt](https://github.com/csula-aero-25-26/forecast-front/blob/8837715a8b3c95e9ecc6d2cbb798464e93b4cebf/docs/assets/readme_style_sheet.png)
 
+## Webpage Diagram
+![image ale](https://github.com/csula-aero-25-26/forecast-front/blob/d656704f04aaa868208b7a6987be58de84b51ed7/docs/assets/readme_webpage_diagram.png) 
+
 ## About
 
 This template was modified by and maintained by **Weihao Liu, Emily Lopez, Troy Rana, and Andy Voong**.
