@@ -73,6 +73,13 @@ export default class ArticleDataWrapper {
             emailJsPublicKey: rawSettings["email_js_public_key"] || undefined,
             emailJsServiceId: rawSettings["email_js_service_id"] || undefined,
             emailJsTemplateId: rawSettings["email_js_template_id"] || undefined,
+
+            // - ArticleChart
+            chartType: rawSettings["chart_type"] || undefined,
+            chartHeight: rawSettings["chart_height"] || undefined,
+            showGrid: rawSettings["show_grid"] !== undefined ? Boolean(rawSettings["show_grid"]) : undefined,
+            showLegend: rawSettings["show_legend"] !== undefined ? Boolean(rawSettings["show_legend"]) : undefined,
+            showTooltip: rawSettings["show_tooltip"] !== undefined ? Boolean(rawSettings["show_tooltip"]) : undefined,
         }
     }
 
