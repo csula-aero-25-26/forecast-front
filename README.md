@@ -35,10 +35,15 @@ npm run dev
 
 
 1. Landing Page
-[]
-3. Meet The Team
-[]
+[] 
+
+2. User Input
+[] 
+
 3. Model Visualization 
+[]
+
+4. Meet The Team
 []
 
 ## Style Guide
