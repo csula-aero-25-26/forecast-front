@@ -5,7 +5,7 @@ Webpage from modified template for CSULA X Aerospace Senior Design 2025-2026 –
 
 ## Component Purpose 
 This project is part of the **CSULA Aerospace Senior Design Team (Fall 2025)**.  
-This repository is meant to work in tandem with the forecast-model and [] repositiories as their frontend page. Working to display the data in such a way that allows for user input. 
+This repository is meant to work in tandem with the forecast-model and backend repositiories as their frontend page. Working to display data based on user input and formed into 7-day Solar Flux prediction graphs. 
 
 
 
