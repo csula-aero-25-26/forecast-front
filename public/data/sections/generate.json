@@ -9,5 +9,89 @@
             }
         }
     },
-    "articles": []
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticleChart",
+            "locales": {
+                "en": {
+                    "title": "Solar Radio Flux Forecast"
+                }
+            },
+            "settings": {
+                "chart_type": "area",
+                "chart_height": 400,
+                "show_grid": true,
+                "show_legend": true,
+                "show_tooltip": true,
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "locales": {
+                        "en": {
+                            "label": "Day 1"
+                        }
+                    },
+                    "percentage": 50
+                },
+                {
+                    "id": 2,
+                    "locales": {
+                        "en": {
+                            "label": "Day 2"
+                        }
+                    },
+                    "percentage": 50
+                },
+                {
+                    "id": 3,
+                    "locales": {
+                        "en": {
+                            "label": "Day 3"
+                        }
+                    },
+                    "percentage": 118
+                },
+                {
+                    "id": 4,
+                    "locales": {
+                        "en": {
+                            "label": "Day 4"
+                        }
+                    },
+                    "percentage": 145
+                },
+                {
+                    "id": 5,
+                    "locales": {
+                        "en": {
+                            "label": "Day 5"
+                        }
+                    },
+                    "percentage": 138
+                },
+                {
+                    "id": 6,
+                    "locales": {
+                        "en": {
+                            "label": "Day 6"
+                        }
+                    },
+                    "percentage": 152
+                },
+                {
+                    "id": 7,
+                    "locales": {
+                        "en": {
+                            "label": "Day 7"
+                        }
+                    },
+                    "percentage": 148
+                }
+            ]
+        }
+    ]
 }
