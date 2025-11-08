@@ -88,6 +88,36 @@ const handlers = {
         }
 
         return response
+    },
+
+    /**
+     * Test connection to Spring Boot backend
+     * @return {Promise<{success: boolean, data?: Object, error?: String}>}
+     */
+    testBackendConnection: async () => {
+        try {
+            const response = await fetch('/api/test', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`)
+            }
+
+            const data = await response.json()
+            return {
+                success: true,
+                data: data
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error: error.message
+            }
+        }
     }
 }
 
