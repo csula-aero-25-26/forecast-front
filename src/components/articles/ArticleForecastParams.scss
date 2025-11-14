@@ -1,0 +1,59 @@
+@import "/src/styles/extend.scss";
+
+.form-submit {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.article-forecast-params-item {
+
+    .form-group-checkbox,
+    .form-group-radio {
+        
+        legend {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+
+        fieldset {
+            
+            label.checkbox-label,
+            label.radio-label {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0.6rem;
+                font-size: 1rem;
+                cursor: pointer;
+                
+
+                input[type="checkbox"],
+                input[type="radio"] {
+                    margin-right: 0.75rem;
+                    flex-shrink: 0;
+                }
+            }
+        }
+    }
+
+ 
+    .form-group-slider {
+        .slider-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem; 
+
+            input[type="range"] {
+                flex-grow: 1;
+            }
+
+            .slider-value {
+                font-size: 1.1rem;
+                font-weight: 600;
+                min-width: 30px; 
+                text-align: right;
+            }
+        }
+    }
+}
