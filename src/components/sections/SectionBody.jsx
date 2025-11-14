@@ -15,6 +15,7 @@ import ArticleText from "/src/components/articles/ArticleText.jsx"
 import ArticleThread from "/src/components/articles/ArticleThread.jsx"
 import ArticleTimeline from "/src/components/articles/ArticleTimeline.jsx"
 import ArticleChart from "/src/components/articles/ArticleChart.jsx"
+import ArticleForecastParams from "/src/components/articles/ArticleForecastParams.jsx";
 
 function SectionBody({ section }) {
     const parser = useParser()
