@@ -1,9 +1,10 @@
 import "./ArticleChart.scss"
-import React, {useState, useMemo} from 'react'
+import React, {useState, useMemo, useContext} from 'react'
 import Article from "/src/components/articles/base/Article.jsx"
 import {BarChart, Bar, LineChart, Line, AreaChart, Area, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts'
 import {useTheme} from "/src/providers/ThemeProvider.jsx"
 import {useUtils} from "/src/hooks/utils.js"
+import SectionBody from "/src/components/sections/SectionBody.jsx"
 
 /**
  * @param {ArticleDataWrapper} dataWrapper
@@ -34,7 +35,20 @@ function ArticleChart({ dataWrapper, id }) {
  * @constructor
  */
 function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
-    const filteredItems = dataWrapper.getOrderedItemsFilteredBy(selectedItemCategoryId)
+    const sectionContext = useContext(SectionBody.Context)
+    const selectedDateRange = sectionContext?.dateRange
+
+    let filteredItems = dataWrapper.getOrderedItemsFilteredBy(selectedItemCategoryId)
+
+    if (selectedDateRange && selectedDateRange.startDate && selectedDateRange.endDate) {
+        const startTs = new Date(selectedDateRange.startDate).getTime()
+        const endTs = new Date(selectedDateRange.endDate).getTime()
+        filteredItems = filteredItems.filter(itemWrapper => {
+            if (!itemWrapper.dateStart) return false
+            const itemTs = itemWrapper.dateStart.getTime()
+            return itemTs >= startTs && itemTs <= endTs
+        })
+    }
     const theme = useTheme()
     const utils = useUtils()
     
