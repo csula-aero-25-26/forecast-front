@@ -1,6 +1,7 @@
 import "./ArticleForecastParams.scss"
 import React, {useEffect, useState} from 'react'
 import Article from "/src/components/articles/base/Article.jsx"
+import { useNavigation } from "/src/providers/NavigationProvider.jsx"
 
 
 /**
@@ -38,8 +39,6 @@ function FormItemRenderer({ item, value, onChange }) {
                 return (
                     <div className="form-group form-group-slider">
                         <label htmlFor={name}>{label} {unit ? `(${unit})` : ''}</label>
-                        
-                        {/* ⬇️ ⬇️ ⬇️ MODIFIED: Added a wrapper div ⬇️ ⬇️ ⬇️ */}
                         <div className="slider-wrapper">
                             <input 
                                 type="range" 
@@ -51,10 +50,8 @@ function FormItemRenderer({ item, value, onChange }) {
                                 value={value || defaultValue} 
                                 onChange={handleChange}     
                             />
-                            {/* ⬇️ ⬇️ ⬇️ ADDED: Span to display the value ⬇️ ⬇️ ⬇️ */}
                             <span className="slider-value">{value || defaultValue}</span>
                         </div>
-                        
                         {helpText && <small className="help-text">{helpText}</small>}
                     </div>
                 );
@@ -139,7 +136,6 @@ function FormItemRenderer({ item, value, onChange }) {
 }
 
 
-
 /**
  * @param {ArticleDataWrapper} dataWrapper
  * @param {Number} id
@@ -147,13 +143,20 @@ function FormItemRenderer({ item, value, onChange }) {
  * @constructor
  */
 function ArticleForecastParams({ dataWrapper, id }) {
+    // State for the form's structure and data
     const [formFields, setFormFields] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [formData, setFormData] = useState({});
-    const [forecastResult, setForecastResult] = useState(null);
+    
+    // State for the submission process
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+ 
+    const navigation = useNavigation();
+
+   
+   
     useEffect(() => {
         const path = `${import.meta.env.BASE_URL}data/sections/f10-params.json`;
         
@@ -165,6 +168,7 @@ function ArticleForecastParams({ dataWrapper, id }) {
                 return response.json();
             })
             .then(data => {
+                // Initialize formData with default values from the JSON
                 const initialData = {};
                 (data.articles || []).forEach(field => {
                     if (field.defaultValue) {
@@ -183,10 +187,12 @@ function ArticleForecastParams({ dataWrapper, id }) {
                 setIsLoading(false);
             });
 
-    }, []);
+    }, []); // Empty array means this runs once on mount
 
+    // Handler to update the formData state when any field changes
     const handleFormChange = (name, value, checked) => {
         setFormData(prevData => {
+            // This is a simplified handler; needs expansion for checkbox groups
             return {
                 ...prevData,
                 [name]: value
@@ -194,36 +200,45 @@ function ArticleForecastParams({ dataWrapper, id }) {
         });
     };
 
+    // Handler for the form submission
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         setIsSubmitting(true);
-        setForecastResult(null);
+        setError(null);
+        
+        sessionStorage.removeItem('forecastResult');
 
-        const API_ENDPOINT = "/api/run-forecast"; // ⚠️ ⚠️ ⚠️ Change this
+
+
+       const API_ENDPOINT = "/api/run-forecast"; 
 
         fetch(API_ENDPOINT, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`Backend error: ${response.status}`);
-            }
+            if (!response.ok) { throw new Error(`Backend error: ${response.status}`); }
             return response.json();
         })
         .then(resultData => {
-            setForecastResult(resultData);
-            setIsSubmitting(false);
+
+            
+    
+            sessionStorage.setItem('forecastResult', JSON.stringify(resultData));
+            
+
+            navigation.navigateToSectionWithLink("#generate");
+
+
         })
         .catch(err => {
             setError(err.message);
-            setIsSubmitting(false);
+            setIsSubmitting(false); 
         });
     };
 
+    // Render the Article frame and the form
     return (
         <Article id={dataWrapper.uniqueId}
                  type={Article.Types.SPACING_DEFAULT}
@@ -252,12 +267,6 @@ function ArticleForecastParams({ dataWrapper, id }) {
                 )}
             </form>
 
-            {forecastResult && (
-                <div className="forecast-result">
-                    <h3>Forecast Generated!</h3>
-                    <pre>{JSON.stringify(forecastResult, null, 2)}</pre>
-                </div>
-            )}
 
         </Article>
     )
