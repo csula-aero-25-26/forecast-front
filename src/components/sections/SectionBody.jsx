@@ -47,7 +47,8 @@ SectionBody.ARTICLES = {
     ArticleText,
     ArticleThread,
     ArticleTimeline,
-    ArticleChart
+    ArticleChart,
+    ArticleForecastParams
 }
 
 export default SectionBody
