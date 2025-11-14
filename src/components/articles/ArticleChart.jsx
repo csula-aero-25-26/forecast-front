@@ -1,5 +1,5 @@
 import "./ArticleChart.scss"
-import React, {useState, useMemo} from 'react'
+import React, {useState, useMemo, useEffect} from 'react'
 import Article from "/src/components/articles/base/Article.jsx"
 import {BarChart, Bar, LineChart, Line, AreaChart, Area, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts'
 import {useTheme} from "/src/providers/ThemeProvider.jsx"
@@ -11,6 +11,7 @@ import {useUtils} from "/src/hooks/utils.js"
  * @return {JSX.Element}
  * @constructor
  */
+// This parent component does not need any changes.
 function ArticleChart({ dataWrapper, id }) {
     const [selectedItemCategoryId, setSelectedItemCategoryId] = useState(null)
 
@@ -37,9 +38,35 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
     const filteredItems = dataWrapper.getOrderedItemsFilteredBy(selectedItemCategoryId)
     const theme = useTheme()
     const utils = useUtils()
-    
-    // Convert items to chart data format
-    const chartData = useMemo(() => {
+
+    const [overrideData, setOverrideData] = useState(null);
+
+    useEffect(() => {
+        // Check if data from the forecast exists in session storage
+        const sessionData = sessionStorage.getItem('forecastResult');
+        
+        if (sessionData) {
+            try {
+                const parsedData = JSON.parse(sessionData);
+                
+                if (parsedData && Array.isArray(parsedData)) {
+                    setOverrideData(parsedData);
+                }
+                
+                // Clear the data so it's not used again on a normal page load/refresh
+                sessionStorage.removeItem('forecastResult');
+            } catch (e) {
+                console.error("Failed to parse forecastResult from sessionStorage", e);
+                // Clear it even if it's bad data
+                sessionStorage.removeItem('forecastResult');
+            }
+        }
+    }, []); // The empty array [] ensures this runs only once on mount
+
+
+
+    // This is the *original* logic to get the default chart data
+    const defaultChartData = useMemo(() => {
         return filteredItems.map(itemWrapper => {
             const name = itemWrapper.locales?.label || 
                         itemWrapper.locales?.title || 
@@ -59,6 +86,12 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
         })
     }, [filteredItems, utils])
 
+
+    const chartData = overrideData ? overrideData : defaultChartData;
+  
+
+
+    // The rest of the component (settings, rendering) is unchanged
     const chartType = dataWrapper.settings?.chartType || 'bar'
     const chartHeight = dataWrapper.settings?.chartHeight || 400
     const showGrid = dataWrapper.settings?.showGrid !== false
@@ -92,7 +125,7 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                             <XAxis 
                                 dataKey="name" 
                                 tick={{ fill: textColor }}
-                                tickFormatter={(value) => value.length > 10 ? `${value.substring(0, 10)}...` : value}
+                                tickFormatter={(value) => String(value).length > 10 ? `${String(value).substring(0, 10)}...` : value}
                             />
                             <YAxis tick={{ fill: textColor }} />
                             {showTooltip && <Tooltip contentStyle={{ backgroundColor: isDarkTheme ? '#2a2a2a' : '#ffffff', color: textColor, border: `1px solid ${gridColor}` }} />}
@@ -117,7 +150,7 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                             <XAxis 
                                 dataKey="name" 
                                 tick={{ fill: textColor }}
-                                tickFormatter={(value) => value.length > 10 ? `${value.substring(0, 10)}...` : value}
+                                tickFormatter={(value) => String(value).length > 10 ? `${String(value).substring(0, 10)}...` : value}
                             />
                             <YAxis tick={{ fill: textColor }} />
                             {showTooltip && <Tooltip contentStyle={{ backgroundColor: isDarkTheme ? '#2a2a2a' : '#ffffff', color: textColor, border: `1px solid ${gridColor}` }} />}
@@ -167,7 +200,7 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                             <XAxis 
                                 dataKey="name" 
                                 tick={{ fill: textColor }}
-                                tickFormatter={(value) => value.length > 10 ? `${value.substring(0, 10)}...` : value}
+                                tickFormatter={(value) => String(value).length > 10 ? `${String(value).substring(0, 10)}...` : value}
                             />
                             <YAxis tick={{ fill: textColor }} />
                             {showTooltip && <Tooltip contentStyle={{ backgroundColor: isDarkTheme ? '#2a2a2a' : '#ffffff', color: textColor, border: `1px solid ${gridColor}` }} />}
