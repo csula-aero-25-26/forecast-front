@@ -19,6 +19,12 @@
             "faIcon": "fa-solid fa-briefcase"
         },
         {
+            "id": "chatbox",
+            "categoryId": "showcase",
+            "jsonPath": "/data/sections/chatbox.json",
+            "faIcon": "fa-solid fa-tools"
+        },
+        {
             "id": "contact",
             "categoryId": "more",
             "jsonPath": "/data/sections/contact.json",
