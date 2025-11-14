@@ -1,13 +1,24 @@
 {
-    "title": {
-        "locales": {
-            "en": {
-                "title_short": "Parameters",
-                "title_short_nav": "Graph Parameters",
-                "title_long_prefix": "This is where you",
-                "title_long": "Input {{Parameters}}"
-            }
+  "title": {
+    "locales": {
+      "en": {
+        "title_short": "F10.7 Forecast",
+        "title_short_nav": "Parameters",
+        "title_long_prefix": "Configure the",
+        "title_long": "Forecast Model"
+      }
+    }
+  },
+  "articles": [
+    {
+      "id": 1,
+      "component": "ArticleForecastParams",
+      "locales": {
+        "en": {
+          "title": "Model Configuration"
         }
-    },
-    "articles": []
+      },
+      "items": []
+    }
+  ]
 }
