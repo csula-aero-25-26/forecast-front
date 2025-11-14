@@ -1,0 +1,124 @@
+{
+  "title": {
+    "locales": {
+      "en": {
+        "title_short": "F10.7 Parameters",
+        "title_short_nav": "Model Parameters",
+        "title_long_prefix": "Configure the",
+        "title_long": "F10.7 Forecast Model"
+      }
+    }
+  },
+  "articles": [
+    {
+      "name": "forecastHorizon",
+      "label": "Forecast Horizon",
+      "type": "slider",
+      "defaultValue": 7,
+      "unit": "days",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "helpText": "Select the number of days into the future to forecast (e.g., 7 days)."
+    },
+    {
+      "name": "modelType",
+      "label": "Machine Learning Model",
+      "type": "select",
+      "defaultValue": "lstm_v2",
+      "options": [
+        {
+          "value": "lstm_v2",
+          "label": "LSTM - Recurrent Neural Network (Recommended)"
+        },
+        {
+          "value": "gru",
+          "label": "GRU - Gated Recurrent Unit"
+        },
+        {
+          "value": "transformer_basic",
+          "label": "Transformer (Experimental)"
+        },
+        {
+          "value": "baseline_persistence",
+          "label": "Baseline (27-day Persistence)"
+        }
+      ],
+      "helpText": "Choose the ML algorithm to run the forecast."
+    },
+    {
+      "name": "inputFeatures",
+      "label": "Input Data Features",
+      "type": "checkbox-group",
+      "defaultValues": [
+        "historical_f10.7",
+        "sunspot_number"
+      ],
+      "options": [
+        {
+          "value": "historical_f10.7",
+          "label": "Historical F10.7 (Past 81 days)"
+        },
+        {
+          "value": "sunspot_number",
+          "label": "Sunspot Number (R)"
+        },
+        {
+          "value": "geomagnetic_ap",
+          "label": "Geomagnetic Ap Index"
+        },
+        {
+          "value": "solar_wind_speed",
+          "label": "Solar Wind Speed (ACE)"
+        },
+        {
+          "value": "f10.7_daily_avg",
+          "label": "F10.7 Daily Average (81-day)"
+        }
+      ],
+      "helpText": "Select the input observables to feed into the model."
+    },
+    {
+      "name": "temporalResolution",
+      "label": "Forecast Resolution",
+      "type": "radio-group",
+      "defaultValue": "daily",
+      "options": [
+        {
+          "value": "daily",
+          "label": "Daily (1 point / day)"
+        },
+        {
+          "value": "12_hourly",
+          "label": "12-Hourly (2 points / day)"
+        },
+        {
+          "value": "3_hourly",
+          "label": "3-Hourly (8 points / day)"
+        }
+      ],
+      "helpText": "Define the time-step interval for the forecast output."
+    },
+    {
+      "name": "outputFormat",
+      "label": "Output Format",
+      "type": "select",
+      "defaultValue": "json",
+      "options": [
+        {
+          "value": "json",
+          "label": "JSON"
+        },
+        {
+          "value": "csv",
+          "label": "CSV"
+        },
+        {
+          "value": "plot_png",
+          "label": "Generate Plot (PNG)"
+        }
+      ],
+      "helpText": "Select the desired format for the forecast results."
+    }
+  ]
+}
