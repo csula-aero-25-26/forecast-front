@@ -70,6 +70,15 @@ const AppEssentialsWrapper = ({children}) => {
         })
 
         api.analytics.reportVisit().then(() => {})
+        
+        // Test backend connection on app load
+        api.handlers.testBackendConnection().then(result => {
+            if (result.success) {
+                console.log('Y A Y:', result.data)
+            } else {
+                console.warn('A H H H', result.error)
+            }
+        })
     }, [])
 
     const _applyDeveloperSettings = (settings) => {
