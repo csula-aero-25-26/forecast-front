@@ -15,6 +15,7 @@ import ArticleText from "/src/components/articles/ArticleText.jsx"
 import ArticleThread from "/src/components/articles/ArticleThread.jsx"
 import ArticleTimeline from "/src/components/articles/ArticleTimeline.jsx"
 import ArticleChart from "/src/components/articles/ArticleChart.jsx"
+import ArticleChatBox from "/src/components/articles/ArticleChatBox.jsx";
 
 function SectionBody({ section }) {
     const parser = useParser()
@@ -46,7 +47,8 @@ SectionBody.ARTICLES = {
     ArticleText,
     ArticleThread,
     ArticleTimeline,
-    ArticleChart
+    ArticleChart,
+    ArticleChatBox
 }
 
 export default SectionBody

@@ -1,0 +1,29 @@
+{
+    "title": {
+        "locales": {
+            "en": {
+                "title_short": "ChatBox",
+                "title_short_nav": "ChatBox",
+                "title_long_prefix": "This is a",
+                "title_long": "{{ChatBox}}"
+            }
+        }
+    },
+    "articles": [
+        {
+  "id": 1,
+  "component": "ArticleChatBox",
+  "locales": {
+    "en": {
+      "title": "Interactive Chat Box"
+    }
+  },
+  "settings": {
+    "show_timestamp": true,
+    "placeholder": "Type your message...",
+    "bot_greeting": "Hello! How can I help you?"
+  }
+}
+
+    ]
+}
