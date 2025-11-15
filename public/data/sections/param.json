@@ -9,21 +9,5 @@
             }
         }
     },
-    "articles": [
-        {
-            "id": 1,
-            "component": "ArticleDateRange",
-            "locales": {
-                "en": {
-                    "title": "Select Date Range",
-                    "start_label": "Start Year",
-                    "end_label": "End Year"
-                }
-            },
-            "settings": {
-                "default_start": "2024",
-                "default_end": "2026"
-            }
-        }
-    ]
+    "articles": []
 }

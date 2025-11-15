@@ -8,7 +8,6 @@ import ImageView from "/src/components/generic/ImageView.jsx"
 import StatusCircle from "/src/components/generic/StatusCircle.jsx"
 import TextTyper from "/src/components/generic/TextTyper.jsx"
 import AudioButton from "/src/components/buttons/AudioButton.jsx"
-import { getFrontFolderImages, normalizeImageSources } from "/src/hooks/utils/imageUtils.js"
 
 function NavProfileCard({ profile, expanded }) {
     const language = useLanguage()
@@ -29,20 +28,6 @@ function NavProfileCard({ profile, expanded }) {
         roles = [roles[0]]
 
     const profilePictureUrl = language.parseJsonText(profile.profilePictureUrl)
-
-    // Use Front folder images or fall back to profile picture URL
-    const pictureSources = getFrontFolderImages() || normalizeImageSources(profilePictureUrl)
-    const [currentPictureIndex, setCurrentPictureIndex] = useState(0)
-
-    useEffect(() => {
-        if(!pictureSources || pictureSources.length <= 1) return
-
-        const interval = setInterval(() => {
-            setCurrentPictureIndex((idx) => (idx + 1) % pictureSources.length)
-        }, 3000) // change image every 3s
-
-        return () => clearInterval(interval)
-    }, [pictureSources.length])
 
     const statusCircleVisible = Boolean(profile.statusCircleVisible)
     const statusCircleVariant = statusCircleVisible ?
@@ -71,7 +56,7 @@ function NavProfileCard({ profile, expanded }) {
 
     return (
         <Card className={`nav-profile-card ${expandedClass}`}>
-            <ImageView src={pictureSources[currentPictureIndex]}
+            <ImageView src={profilePictureUrl}
                        className={`nav-profile-card-avatar`}
                        hideSpinner={true}
                        alt={name}/>
