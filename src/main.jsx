@@ -15,8 +15,6 @@ import InputProvider from "/src/providers/InputProvider.jsx"
 import NavigationProvider from "/src/providers/NavigationProvider.jsx"
 import Portfolio from "/src/components/Portfolio.jsx"
 
-import React from "react";
-
 /** Initialization Script... **/
 let container = null
 
