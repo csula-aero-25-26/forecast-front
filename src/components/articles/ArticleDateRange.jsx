@@ -103,12 +103,14 @@ export default function ArticleDateRange({ dataWrapper }) {
                 <input
                   type="number"
                   min="1"
-                  value={inputValues[idx] || "1"}
+                  value={inputValues[idx] || ""}
                   onChange={(e) => {
                     const newValue = e.target.value
+                    // Only update the input value while typing; do not apply the range
+                    // until the user explicitly clicks the button. This avoids passing
+                    // transient non-numeric values (like "-" or "∞") into the
+                    // range functions which can produce invalid dates and crash.
                     setInputValues({ ...inputValues, [idx]: newValue })
-                    const newRange = inputRange.range(newValue)
-                    updateRangeAndContext(newRange.startDate, newRange.endDate)
                   }}
                   style={{
                     padding: "6px 8px",
@@ -123,10 +125,18 @@ export default function ArticleDateRange({ dataWrapper }) {
                 />
                 <button
                   onClick={() => {
-                    // apply current input value
-                    const val = inputValues[idx] || "1"
-                    const newRange = inputRange.range(val)
+                    // apply current input value (validate and coerce to a positive integer)
+                    const raw = inputValues[idx]
+                    let num = Number(raw)
+                    if (!Number.isFinite(num) || num < 1) {
+                      num = 1
+                    } else {
+                      num = Math.floor(num)
+                    }
+                    const newRange = inputRange.range(num)
                     updateRangeAndContext(newRange.startDate, newRange.endDate)
+                    // normalize the displayed input to the applied numeric value
+                    setInputValues({ ...inputValues, [idx]: String(num) })
                   }}
                   style={{
                     padding: "6px 10px",

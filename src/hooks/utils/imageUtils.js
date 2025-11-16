@@ -28,11 +28,24 @@ export const getFrontFolderImages = () => {
  * @returns {string[]} Array of image URLs
  */
 export const normalizeImageSources = (src) => {
+  const normalize = (s) => {
+    if (typeof s !== "string") return null
+    // Convert paths that reference the `public/` folder to the served root.
+    // e.g. "public/images/..." -> "/images/..."
+    if (s.startsWith("public/")) {
+      return s.replace(/^public\//, "/")
+    }
+    return s
+  }
+
   if (Array.isArray(src)) {
-    return src.filter((s) => s && typeof s === "string");
+    return src
+      .map(normalize)
+      .filter((s) => s && typeof s === "string")
   }
   if (typeof src === "string" && src.length > 0) {
-    return [src];
+    const n = normalize(src)
+    return n ? [n] : []
   }
   return [];
 };

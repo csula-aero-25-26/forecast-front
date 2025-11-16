@@ -31,7 +31,15 @@ function NavProfileCard({ profile, expanded }) {
     // Prefer explicit profile images from `profile.profilePictureUrl`,
     // otherwise fallback to images from the Front folder.
     const rawProfilePic = language.parseJsonText(profile.profilePictureUrl)
-    const profileSources = (rawProfilePic && normalizeImageSources(rawProfilePic)) || getFrontFolderImages()
+    let profileSources = (rawProfilePic && normalizeImageSources(rawProfilePic)) || getFrontFolderImages()
+
+    // If the provided single source points into the content folders, prefer
+    // cycling the entire folder so users see multiple avatars instead of a
+    // single static image. This helps when `profilePictureUrl` points to a
+    // single file inside `/images/content/...` (common in local previews).
+    if (profileSources.length === 1 && typeof profileSources[0] === 'string' && profileSources[0].includes('/images/content/')) {
+        profileSources = getFrontFolderImages()
+    }
 
     const statusCircleVisible = Boolean(profile.statusCircleVisible)
     const statusCircleVariant = statusCircleVisible ?

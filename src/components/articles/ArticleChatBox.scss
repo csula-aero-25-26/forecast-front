@@ -1,0 +1,122 @@
+@import "/src/styles/extend.scss";
+
+.article-chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  background: #121212;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto; /* ✅ Enables scrollbar */
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    scroll-behavior: smooth;
+
+    /* Custom dark scrollbar */
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #121212;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+
+  .chat-message {
+    padding: 10px 14px;
+    border-radius: 16px;
+    margin: 6px 0;
+    max-width: 75%;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.2s ease-in-out;
+  }
+
+  .from-user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #4a90e2, #357abd);
+    color: #fff;
+  }
+
+  .from-bot {
+    align-self: flex-start;
+    background: linear-gradient(135deg, #5dade2, #2874a6);
+    color: #fff;
+  }
+
+  .chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #181818;
+    border-top: 1px solid #333;
+    position: sticky;
+    bottom: 0;
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+
+      &::placeholder {
+        color: #777;
+      }
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      background: linear-gradient(135deg, #4a90e2, #357abd);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background: linear-gradient(135deg, #5dade2, #2e86c1);
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
