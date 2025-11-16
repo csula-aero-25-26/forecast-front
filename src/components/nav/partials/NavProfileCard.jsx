@@ -4,11 +4,11 @@ import {Card} from "react-bootstrap"
 import {useLanguage} from "/src/providers/LanguageProvider.jsx"
 import {useNavigation} from "/src/providers/NavigationProvider.jsx"
 import {useUtils} from "/src/hooks/utils.js"
-import ImageView from "/src/components/generic/ImageView.jsx"
+import AvatarView from "/src/components/generic/AvatarView.jsx"
+import { getFrontFolderImages, normalizeImageSources } from "/src/hooks/utils/imageUtils.js"
 import StatusCircle from "/src/components/generic/StatusCircle.jsx"
 import TextTyper from "/src/components/generic/TextTyper.jsx"
 import AudioButton from "/src/components/buttons/AudioButton.jsx"
-import { getFrontFolderImages, normalizeImageSources } from "/src/hooks/utils/imageUtils.js"
 
 function NavProfileCard({ profile, expanded }) {
     const language = useLanguage()
@@ -28,21 +28,18 @@ function NavProfileCard({ profile, expanded }) {
     if(utils.storage.getWindowVariable("suspendAnimations") && roles.length > 2)
         roles = [roles[0]]
 
-    const profilePictureUrl = language.parseJsonText(profile.profilePictureUrl)
+    // Prefer explicit profile images from `profile.profilePictureUrl`,
+    // otherwise fallback to images from the Front folder.
+    const rawProfilePic = language.parseJsonText(profile.profilePictureUrl)
+    let profileSources = (rawProfilePic && normalizeImageSources(rawProfilePic)) || getFrontFolderImages()
 
-    // Use Front folder images or fall back to profile picture URL
-    const pictureSources = getFrontFolderImages() || normalizeImageSources(profilePictureUrl)
-    const [currentPictureIndex, setCurrentPictureIndex] = useState(0)
-
-    useEffect(() => {
-        if(!pictureSources || pictureSources.length <= 1) return
-
-        const interval = setInterval(() => {
-            setCurrentPictureIndex((idx) => (idx + 1) % pictureSources.length)
-        }, 3000) // change image every 3s
-
-        return () => clearInterval(interval)
-    }, [pictureSources.length])
+    // If the provided single source points into the content folders, prefer
+    // cycling the entire folder so users see multiple avatars instead of a
+    // single static image. This helps when `profilePictureUrl` points to a
+    // single file inside `/images/content/...` (common in local previews).
+    if (profileSources.length === 1 && typeof profileSources[0] === 'string' && profileSources[0].includes('/images/content/')) {
+        profileSources = getFrontFolderImages()
+    }
 
     const statusCircleVisible = Boolean(profile.statusCircleVisible)
     const statusCircleVariant = statusCircleVisible ?
@@ -71,10 +68,10 @@ function NavProfileCard({ profile, expanded }) {
 
     return (
         <Card className={`nav-profile-card ${expandedClass}`}>
-            <ImageView src={pictureSources[currentPictureIndex]}
-                       className={`nav-profile-card-avatar`}
-                       hideSpinner={true}
-                       alt={name}/>
+            <AvatarView src={profileSources}
+                        className={`nav-profile-card-avatar`}
+                        alt={name}
+                        cycleInterval={3000}/>
 
             {statusCircleVisible && (
                 <StatusCircle className={`nav-profile-card-status-circle`}

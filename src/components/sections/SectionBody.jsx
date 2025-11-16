@@ -16,7 +16,7 @@ import ArticleThread from "/src/components/articles/ArticleThread.jsx"
 import ArticleTimeline from "/src/components/articles/ArticleTimeline.jsx"
 import ArticleChart from "/src/components/articles/ArticleChart.jsx"
 import ArticleDateRange from "/src/components/articles/ArticleDateRange.jsx"
-import ArticleChatBox from "/src/components/articles/ArticleChatBox.jsx";
+import ArticleChatBox from "/src/components/articles/ArticleChatBox.jsx"
 
 function SectionBody({ section }) {
     const parser = useParser()
@@ -54,8 +54,8 @@ SectionBody.ARTICLES = {
     ArticleText,
     ArticleThread,
     ArticleTimeline,
-    ArticleDateRange,
     ArticleChart,
+    ArticleDateRange,
     ArticleChatBox
 }
 

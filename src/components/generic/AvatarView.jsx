@@ -2,31 +2,29 @@ import "./AvatarView.scss"
 import React, {useEffect, useState} from 'react'
 import ImageView from "/src/components/generic/ImageView.jsx"
 
-function AvatarView({ src = "", alt = "", faIcon = "", className = "",  id = null, style = null }) {
+function AvatarView({ src = "", alt = "", faIcon = "", className = "", id = null, style = null, cycleInterval = 3000 }) {
     const [currentIndex, setCurrentIndex] = useState(0)
-
     const sources = Array.isArray(src) ? src : (src ? [src] : [])
 
     useEffect(() => {
-        if(!sources || sources.length <= 1) return
+        if (!sources || sources.length <= 1) return
+        setCurrentIndex(0)
+        const t = setInterval(() => {
+            setCurrentIndex((i) => (i + 1) % sources.length)
+        }, cycleInterval)
+        return () => clearInterval(t)
+    }, [src, cycleInterval])
 
-        const interval = setInterval(() => {
-            setCurrentIndex(i => (i + 1) % sources.length)
-        }, 3000)
+    const currentSrc = sources.length ? sources[currentIndex] : ""
 
-        return () => clearInterval(interval)
-    }, [src])
-
-    const currentSrc = sources.length > 0 ? sources[currentIndex] : null
-
-    return (
+        return (
         <div className={`avatar-view ${className}`}
-             id={id}
-             style={style}>
+                 id={id}
+                 style={style}>
             {currentSrc ? (
                 <ImageView src={currentSrc}
-                           alt={alt}
-                           className={`avatar-view-image-view`}/>
+                                     alt={alt}
+                                     className={`avatar-view-image-view`}/>
             ) : (
                 <div className={`avatar-icon-view`}>
                     <i className={`${faIcon}`}/>

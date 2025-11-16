@@ -7,19 +7,17 @@
  * @returns {string[]} Array of image paths
  */
 export const getFrontFolderImages = () => {
+  // Use public root paths served by Vite: paths should start with '/images/...'
   const images = [
-    // Front folder (4 images)
-    "public/images/content/Front/Andy.jpg",
-    "public/images/content/Front/Emily.jpg",
-    "public/images/content/Front/Troy.png",
-    "public/images/content/Front/Weihao.jpg",
-    // Back folder (2 images)
-    "public/images/content/Back/Daniel G.jpg",
-    "public/images/content/Back/Marco.jpg",
-    // Machine folder (3 images)
-    "public/images/content/Machine/Daniel H.jpg",
-    "public/images/content/Machine/Josh.png",
-    "public/images/content/Machine/Rizza.jpg",
+    "/images/content/Front/Andy.jpg",
+    "/images/content/Front/Emily.jpg",
+    "/images/content/Front/Troy.png",
+    "/images/content/Front/Weihao.jpg",
+    "/images/content/Back/Daniel G.jpg",
+    "/images/content/Back/Marco.jpg",
+    "/images/content/Machine/Daniel H.jpg",
+    "/images/content/Machine/Josh.png",
+    "/images/content/Machine/Rizza.jpg",
   ];
   return images;
 };
@@ -30,11 +28,24 @@ export const getFrontFolderImages = () => {
  * @returns {string[]} Array of image URLs
  */
 export const normalizeImageSources = (src) => {
+  const normalize = (s) => {
+    if (typeof s !== "string") return null
+    // Convert paths that reference the `public/` folder to the served root.
+    // e.g. "public/images/..." -> "/images/..."
+    if (s.startsWith("public/")) {
+      return s.replace(/^public\//, "/")
+    }
+    return s
+  }
+
   if (Array.isArray(src)) {
-    return src.filter((s) => s && typeof s === "string");
+    return src
+      .map(normalize)
+      .filter((s) => s && typeof s === "string")
   }
   if (typeof src === "string" && src.length > 0) {
-    return [src];
+    const n = normalize(src)
+    return n ? [n] : []
   }
   return [];
 };
