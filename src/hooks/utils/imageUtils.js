@@ -35,7 +35,14 @@ export const normalizeImageSources = (src) => {
     if (s.startsWith("public/")) {
       return s.replace(/^public\//, "/")
     }
-    return s
+    // Ensure paths that start with 'images/' are root-relative for Vite serving
+    if (s.startsWith("images/")) {
+      return "/" + s
+    }
+
+    // Normalize backslashes to forward slashes (Windows paths)
+    const normalized = s.replace(/\\/g, "/")
+    return normalized
   }
 
   if (Array.isArray(src)) {
