@@ -15,11 +15,11 @@
             "component": "ArticleChart",
             "locales": {
                 "en": {
-                    "title": "Solar Radio Flux Forecast"
+                    "title": "Solar Radio Flux Forecast - Bar"
                 }
             },
             "settings": {
-                "chart_type": "area",
+                "chart_type": "Bar",
                 "chart_height": 400,
                 "show_grid": true,
                 "show_legend": true,
