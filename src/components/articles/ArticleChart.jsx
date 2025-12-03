@@ -100,9 +100,9 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                             <Line 
                                 type="monotone" 
                                 dataKey="value" 
-                                stroke="#8884d8" 
+                                stroke="#FFCE00" 
                                 strokeWidth={2}
-                                dot={{ fill: '#8884d8' }}
+                                dot={{ fill: '#FFCE00' }}
                                 activeDot={{ r: 6 }}
                             />
                         </LineChart>
@@ -125,8 +125,8 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                             <Area 
                                 type="monotone" 
                                 dataKey="value" 
-                                stroke="#8884d8" 
-                                fill="#8884d8"
+                                stroke="#FFCE00" 
+                                fill="#FFCE00"
                                 fillOpacity={0.6}
                             />
                         </AreaChart>
@@ -134,7 +134,7 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                 )
 
             case 'pie':
-                const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00ff00', '#0088fe', '#00c49f', '#ffbb28', '#ff8042']
+                const COLORS = ['#FFCE00', '#82ca9d', '#ffc658', '#ff7300', '#00ff00', '#0088fe', '#00c49f', '#ffbb28', '#ff8042']
                 return (
                     <ResponsiveContainer width="100%" height={chartHeight}>
                         <PieChart>
@@ -147,7 +147,7 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                                 labelLine={false}
                                 label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                                 outerRadius={chartHeight / 3}
-                                fill="#8884d8"
+                                fill="#FFCE00"
                                 dataKey="value"
                             >
                                 {chartData.map((entry, index) => (
@@ -172,7 +172,7 @@ function ArticleChartItems({ dataWrapper, selectedItemCategoryId }) {
                             <YAxis tick={{ fill: textColor }} />
                             {showTooltip && <Tooltip contentStyle={{ backgroundColor: isDarkTheme ? '#2a2a2a' : '#ffffff', color: textColor, border: `1px solid ${gridColor}` }} />}
                             {showLegend && <Legend wrapperStyle={{ color: textColor }} />}
-                            <Bar dataKey="value" fill="#8884d8" />
+                            <Bar dataKey="value" fill="#FFCE00" />
                         </BarChart>
                     </ResponsiveContainer>
                 )

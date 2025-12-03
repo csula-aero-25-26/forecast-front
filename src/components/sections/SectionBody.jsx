@@ -1,5 +1,5 @@
 import "./SectionBody.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { useParser } from "/src/hooks/parser.js";
 import ArticleCards from "/src/components/articles/ArticleCards.jsx";
 import ArticleContactForm from "/src/components/articles/ArticleContactForm.jsx";
@@ -15,7 +15,9 @@ import ArticleText from "/src/components/articles/ArticleText.jsx";
 import ArticleThread from "/src/components/articles/ArticleThread.jsx";
 import ArticleTimeline from "/src/components/articles/ArticleTimeline.jsx";
 import ArticleChart from "/src/components/articles/ArticleChart.jsx";
+import ArticleDateRange from "/src/components/articles/ArticleDateRange.jsx";
 import ArticleChatBox from "/src/components/articles/ArticleChatBox.jsx";
+
 
 import ArticleCustom from "/src/components/articles/ArticleCustom.jsx";
 
@@ -23,35 +25,43 @@ function SectionBody({ section }) {
   const parser = useParser();
   const articleDataWrappers = parser.parseSectionArticles(section);
 
-  return (
-    <div className={`section-body`}>
-      {articleDataWrappers &&
-        articleDataWrappers.map((dataWrapper, key) => {
-          const Component =
-            SectionBody.ARTICLES[dataWrapper.component] || ArticleNotFound;
-          return <Component dataWrapper={dataWrapper} id={key} key={key} />;
-        })}
-    </div>
-  );
+    const [dateRange, setDateRange] = useState(null)
+
+    return (
+        <div className={`section-body`}>
+            <SectionBody.Context.Provider value={{ dateRange, setDateRange }}>
+                {articleDataWrappers && articleDataWrappers.map((dataWrapper, key) => {
+                    const Component = SectionBody.ARTICLES[dataWrapper.component] || ArticleNotFound
+                    return <Component dataWrapper={dataWrapper}
+                                      id={key}
+                                      key={key}/>
+                })}
+            </SectionBody.Context.Provider>
+        </div>
+    )
 }
 
+SectionBody.Context = createContext({ dateRange: null, setDateRange: () => {} })
+
 SectionBody.ARTICLES = {
-  ArticleCards,
-  ArticleContactForm,
-  ArticleFacts,
-  ArticleInfoList,
-  ArticleInlineList,
-  ArticleNotFound,
-  ArticlePortfolio,
-  ArticleSkills,
-  ArticleStack,
-  ArticleTestimonials,
-  ArticleText,
-  ArticleThread,
-  ArticleTimeline,
-  ArticleChart,
-  ArticleChatBox,
-  ArticleCustom,
+ArticleCards,
+ArticleContactForm,
+ArticleFacts,
+ArticleInfoList,
+ArticleInlineList,
+ArticleNotFound,
+ArticlePortfolio,
+ArticleSkills,
+ArticleStack,
+ArticleTestimonials,
+ArticleText,
+ArticleThread,
+ArticleTimeline,
+ArticleChart,
+ArticleDateRange,
+ArticleChatBox,
+ArticleCustom,
 };
+
 
 export default SectionBody;

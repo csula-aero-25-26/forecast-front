@@ -9,5 +9,21 @@
             }
         }
     },
-    "articles": []
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticleDateRange",
+            "locales": {
+                "en": {
+                    "title": "Graph Parameters",
+                    "start_label": "Start",
+                    "end_label": "End"
+                }
+            },
+            "settings": {
+                "default_start": 2020,
+                "default_end": 2025
+            }
+        }
+    ]
 }
