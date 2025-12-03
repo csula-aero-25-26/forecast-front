@@ -1,0 +1,18 @@
+{
+  "title": {
+    "locales": {
+      "en": {
+        "title_short": "Predictions",
+        "title_short_nav": "Predictions",
+        "title_long_prefix": "Get the latest",
+        "title_long": "F10.7 Solar Flux Forecast"
+      }
+    }
+  },
+  "articles": [
+    {
+      "id": "prediction-latest",
+      "component": "ArticleCustom"
+    }
+  ]
+}
