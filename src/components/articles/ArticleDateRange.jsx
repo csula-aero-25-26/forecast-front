@@ -26,9 +26,6 @@ export default function ArticleDateRange({ dataWrapper }) {
   }
 
   useEffect(() => {
-    // Initialize only when the article's unique id changes. Article objects may be recreated
-    // on parent re-renders, but `uniqueId` is stable for the same article, so this
-    // prevents overwriting the user's selection when the section re-renders.
     if (!article) return
 
     const uniqueId = article.uniqueId || article.id
@@ -45,10 +42,8 @@ export default function ArticleDateRange({ dataWrapper }) {
 
     setRange([initial])
 
-    // initialize shared range for other components in the same section
     if (setDateRange) setDateRange({ startDate: initial.startDate, endDate: initial.endDate })
     
-    // Initialize input values
     const inputRanges = getDefaultInputRanges()
     const newInputValues = {}
     inputRanges.forEach((inputRange, idx) => {
@@ -62,8 +57,163 @@ export default function ArticleDateRange({ dataWrapper }) {
   const { title, start_label, end_label } = article.locales?.en || {}
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>{title}</h2>
+    <div className="article-date-range" style={{ padding: "20px" }}>
+      <style>{`
+        /* Calendar wrapper and top bar use card background in light, section accent in dark */
+        .article-date-range .rdrCalendarWrapper,
+        .article-date-range .rdrMonth,
+        .article-date-range .rdrMonthsHorizontal,
+        .article-date-range .rdrMonthsVertical,
+        .article-date-range .rdrMonths .rdrMonthAndYearWrapper {
+          background: var(--theme-card-background);
+        }
+        [data-theme="dark"] .article-date-range .rdrCalendarWrapper,
+        [data-theme="dark"] .article-date-range .rdrMonth,
+        [data-theme="dark"] .article-date-range .rdrMonthsHorizontal,
+        [data-theme="dark"] .article-date-range .rdrMonthsVertical,
+        [data-theme="dark"] .article-date-range .rdrMonths .rdrMonthAndYearWrapper {
+          background: var(--theme-section-background-accent);
+        }
+        .article-date-range .rdrCalendarWrapper {
+          color: var(--theme-texts);
+          border: 1px solid var(--theme-standard-borders);
+          border-radius: 6px;
+          padding: 8px;
+        }
+        [data-theme="dark"] .article-date-range .rdrCalendarWrapper {
+          border-color: var(--theme-standard-borders);
+        }
+        .article-date-range .rdrMonth {
+          border-radius: 6px 6px 0 0;
+          padding: 6px 8px;
+          margin-bottom: 6px;
+        }
+        .article-date-range .rdrMonth > .rdrMonthName {
+          color: var(--theme-texts);
+          font-weight: 600;
+        }
+        [data-theme="dark"] .article-date-range .rdrMonth > .rdrMonthName {
+          color: var(--theme-texts-inv);
+        }
+        .article-date-range .rdrMonthName, .article-date-range .rdrWeekDays, .article-date-range .rdrDayNumber {
+          color: var(--theme-texts);
+        }
+        .article-date-range .rdrDayToday {
+          box-shadow: 0 0 0 1px var(--theme-primary) inset;
+        }
+        .article-date-range .rdrDaySelected, .article-date-range .rdrDayActive, .article-date-range .rdrSelected {
+          background: var(--theme-primary) !important;
+          color: var(--theme-texts-inv) !important;
+        }
+        /* Preview days (from other months): lighter in both themes */
+        .article-date-range .rdrDayPassive {
+          color: var(--theme-texts-4, #b0b0b0);
+          opacity: 0.7;
+        }
+        [data-theme="dark"] .article-date-range .rdrDayPassive {
+          color: var(--theme-texts-light-3, #cccccc);
+          opacity: 0.7;
+        }
+        /* Preset and apply buttons */
+        .article-date-range .adr-preset-btn, .article-date-range .adr-apply-btn {
+          border: 1px solid var(--theme-standard-borders);
+          border-radius: 4px;
+          cursor: pointer;
+          color: var(--theme-texts);
+          font-size: 14px;
+          background-color: var(--theme-background-contrast);
+        }
+        [data-theme="dark"] .article-date-range .adr-preset-btn, [data-theme="dark"] .article-date-range .adr-apply-btn {
+          background-color: var(--theme-primary);
+          color: var(--theme-texts-inv);
+        }
+        .article-date-range .adr-preset-btn:hover, .article-date-range .adr-apply-btn:hover {
+          background-color: var(--theme-primary-5, var(--theme-primary)) !important;
+          color: var(--theme-texts-inv) !important;
+        }
+        .article-date-range .adr-input {
+          padding: 6px 8px;
+          border: 1px solid var(--theme-standard-borders);
+          border-radius: 4px;
+          font-size: 13px;
+          width: 64px;
+          background-color: var(--theme-card-background);
+          color: var(--theme-texts);
+          text-align: center;
+        }
+        /* Date input fields at top of calendar */
+        .article-date-range .rdrDateInput,
+        .article-date-range .rdrDateInputWrapper,
+        .article-date-range .rdrInputDateFieldWrapper {
+          background: var(--theme-card-background);
+          color: var(--theme-texts);
+          border-color: var(--theme-standard-borders);
+        }
+        [data-theme="dark"] .article-date-range .rdrDateInput,
+        [data-theme="dark"] .article-date-range .rdrDateInputWrapper,
+        [data-theme="dark"] .article-date-range .rdrInputDateFieldWrapper {
+          background: var(--theme-section-background-accent);
+          color: var(--theme-texts-inv);
+          border-color: var(--theme-standard-borders);
+        }
+        .article-date-range .rdrDateInput input,
+        .article-date-range .rdrDateInputWrapper input,
+        .article-date-range .rdrInputDateFieldWrapper input {
+          background: var(--theme-card-background);
+          color: var(--theme-texts);
+          border-color: var(--theme-standard-borders);
+        }
+        [data-theme="dark"] .article-date-range .rdrDateInput input,
+        [data-theme="dark"] .article-date-range .rdrDateInputWrapper input,
+        [data-theme="dark"] .article-date-range .rdrInputDateFieldWrapper input {
+          background: var(--theme-section-background-accent);
+          color: var(--theme-texts-inv);
+          border-color: var(--theme-standard-borders);
+        }
+        /* Container holding both start and end date inputs */
+        .article-date-range .rdrInputs {
+          background: var(--theme-card-background);
+          border-color: var(--theme-standard-borders);
+        }
+        [data-theme="dark"] .article-date-range .rdrInputs {
+          background: var(--theme-section-background-accent);
+          border-color: var(--theme-standard-borders);
+        }
+        /* Padding area around the input boxes */
+        .article-date-range .rdrInput {
+          background: var(--theme-card-background);
+        }
+        [data-theme="dark"] .article-date-range .rdrInput {
+          background: var(--theme-section-background-accent);
+        }
+        /* Title bar at top */
+        .article-date-range .adr-title-bar {
+          background: var(--theme-card-background);
+          color: var(--theme-texts);
+          padding: 12px 16px;
+          border-radius: 6px;
+          margin-bottom: 16px;
+          margin: 0 0 16px 0;
+        }
+        [data-theme="dark"] .article-date-range .adr-title-bar {
+          background: var(--theme-section-background-accent);
+          color: var(--theme-texts-inv);
+        }
+        /* Selected range bar below calendar */
+        .article-date-range .adr-selected-bar {
+          background: var(--theme-card-background);
+          color: var(--theme-texts);
+          padding: 10px 16px;
+          border-radius: 6px;
+          margin-top: 20px;
+        }
+        [data-theme="dark"] .article-date-range .adr-selected-bar {
+          background: var(--theme-section-background-accent);
+          color: var(--theme-texts-inv);
+        }
+      `}</style>
+
+      <h2 className="adr-title-bar">{title}</h2>
 
       {/* Date Range Picker with Preset Buttons */}
       <div style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
@@ -74,22 +224,11 @@ export default function ArticleDateRange({ dataWrapper }) {
             {getDefaultStaticRanges().map((preset, idx) => (
               <button
                 key={idx}
+                className="adr-preset-btn"
                 onClick={() => {
                   const presetRange = preset.range()
                   updateRangeAndContext(presetRange.startDate, presetRange.endDate)
                 }}
-                style={{
-                  padding: "8px 12px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  backgroundColor: "#f5f5f5",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  textAlign: "left",
-                  color: "#333",
-                }}
-                onMouseEnter={(e) => (e.target.style.backgroundColor = "#e0e0e0")}
-                onMouseLeave={(e) => (e.target.style.backgroundColor = "#f5f5f5")}
               >
                 {preset.label}
               </button>
@@ -97,7 +236,7 @@ export default function ArticleDateRange({ dataWrapper }) {
           </div>
 
           {/* Input Range Controls */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "10px", borderTop: "1px solid #ddd" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "10px", borderTop: "1px solid var(--theme-standard-borders)" }}>
             {getDefaultInputRanges().map((inputRange, idx) => (
               <div key={idx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <input
@@ -112,16 +251,7 @@ export default function ArticleDateRange({ dataWrapper }) {
                     // range functions which can produce invalid dates and crash.
                     setInputValues({ ...inputValues, [idx]: newValue })
                   }}
-                  style={{
-                    padding: "6px 8px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    fontSize: "13px",
-                    width: "64px",
-                    backgroundColor: "#f5f5f5",
-                    color: "#333",
-                    textAlign: "center",
-                  }}
+                  className="adr-input"
                 />
                 <button
                   onClick={() => {
@@ -138,15 +268,7 @@ export default function ArticleDateRange({ dataWrapper }) {
                     // normalize the displayed input to the applied numeric value
                     setInputValues({ ...inputValues, [idx]: String(num) })
                   }}
-                  style={{
-                    padding: "6px 10px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    backgroundColor: "#f5f5f5",
-                    cursor: "pointer",
-                    color: "#333",
-                    fontSize: "13px",
-                  }}
+                  className="adr-apply-btn"
                 >
                   {inputRange.label}
                 </button>
@@ -168,8 +290,8 @@ export default function ArticleDateRange({ dataWrapper }) {
         />
       </div>
 
-      {/* Display Selected Range */}
-      <div style={{ marginTop: "20px" }}>
+        {/* Display Selected Range */}
+      <div className="adr-selected-bar">
         <strong>{start_label}:</strong> {range[0]?.startDate ? format(range[0].startDate, "yyyy-MM-dd") : "-"} <br />
         <strong>{end_label}:</strong> {range[0]?.endDate ? format(range[0].endDate, "yyyy-MM-dd") : "-"}
       </div>

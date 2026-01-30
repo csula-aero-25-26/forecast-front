@@ -4,7 +4,7 @@ import Animable from "/src/components/capabilities/Animable.jsx"
 import {useUtils} from "/src/hooks/utils.js"
 import {useNavigation} from "/src/providers/NavigationProvider.jsx"
 
-function TextTyper({ strings, id, typingSpeed = 0.03, deletingSpeed = 0, displayTime = 2, className = "" }) {
+function TextTyper({ strings, id, typingSpeed = 0.03, deletingSpeed = 0, displayTime = 2, className = "", onWordChange = null }) {
     const utils = useUtils()
     const navigation = useNavigation()
 
@@ -83,6 +83,12 @@ function TextTyper({ strings, id, typingSpeed = 0.03, deletingSpeed = 0, display
 
     const _onStatusShowing = () => {
         _toggleCursor(0.2)
+
+        // Notify parent that this word is being shown (fully typed)
+        if(typeof onWordChange === 'function' && parsedStrings && targetWord) {
+            const idx = parsedStrings.indexOf(targetWord)
+            try { onWordChange(targetWord, idx) } catch(e) { /* ignore */ }
+        }
 
         if(statusElapsed > displayTime) {
             _nextStatus()

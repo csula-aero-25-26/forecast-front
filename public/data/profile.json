@@ -1,6 +1,10 @@
 {
     "name": "Team 10",
     "profilePictureUrl": "images/content/pfp.png",
+    "imageMap": {
+        "Daniel Herrera": "images/content/Machine/Daniel H.jpg",
+        "Daniel Gomez": "images/content/Back/Daniel G.jpg"
+    },
     "resumePdfUrl": "",
     "statusCircleVisible": false,
     "statusCircleVariant": "available",
@@ -20,8 +24,7 @@
                 "Weihao Liu",
                 "Emily Lopez",
                 "Troy Rana",
-                "Fabricio Reyes",
-                "Maro Rodriguez",
+                "Marco Rodriguez",
                 "Andy Voong"
             ],
             "name_pronunciation_ipa": "",

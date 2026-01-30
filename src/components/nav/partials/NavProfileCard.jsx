@@ -28,18 +28,94 @@ function NavProfileCard({ profile, expanded }) {
     if(utils.storage.getWindowVariable("suspendAnimations") && roles.length > 2)
         roles = [roles[0]]
 
-    // Prefer explicit profile images from `profile.profilePictureUrl`,
-    // otherwise fallback to images from the Front folder.
     const rawProfilePic = language.parseJsonText(profile.profilePictureUrl)
     let profileSources = (rawProfilePic && normalizeImageSources(rawProfilePic)) || getFrontFolderImages()
 
-    // If the provided single source points into the content folders, prefer
-    // cycling the entire folder so users see multiple avatars instead of a
-    // single static image. This helps when `profilePictureUrl` points to a
-    // single file inside `/images/content/...` (common in local previews).
+
     if (profileSources.length === 1 && typeof profileSources[0] === 'string' && profileSources[0].includes('/images/content/')) {
         profileSources = getFrontFolderImages()
     }
+
+    const [currentDisplayedWord, setCurrentDisplayedWord] = useState(null)
+
+    function slugify(name) {
+        return String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
+    }
+
+    const extensions = ['png', 'jpg']
+
+    const findImageForWord = (word, sources = profileSources) => {
+        if (!word || !sources || !sources.length) return null
+        const lower = String(word).toLowerCase()
+        const tokens = lower.split(/\s+/).filter(Boolean)
+
+        if (lower.includes('advisor') || lower.includes('student members')) {
+            return '/images/content/ae.png'
+        }
+
+        if (profile && profile.imageMap && Object.keys(profile.imageMap).length) {
+            const map = {}
+            for (const [k, v] of Object.entries(profile.imageMap)) {
+                const nk = String(k).toLowerCase().trim()
+                const nv = normalizeImageSources(v)
+                if (nv && nv.length) map[nk] = nv[0]
+            }
+
+            if (map[lower]) return map[lower]
+            const joined = tokens.join(' ')
+            if (map[joined]) return map[joined]
+
+            for (const [k, src] of Object.entries(map)) {
+                if (k.includes(lower) || lower.includes(k)) return src
+                const kTokens = k.split(/\s+/)
+                if (kTokens[0] === tokens[0] && kTokens[1] && tokens[1] && kTokens[1].charAt(0) === tokens[1].charAt(0)) return src
+            }
+        }
+
+        const slug = slugify(word)
+
+        for (const src of sources) {
+            const name = src.split('/').pop().replace(/\.[^/.]+$/, '')
+            if (slugify(name) === slug) return src
+        }
+
+        for (const src of sources) {
+            const name = src.split('/').pop().toLowerCase().replace(/\.[^/.]+$/, '')
+            for (const token of tokens) {
+                if (name.includes(token) || name.includes(token.slice(0, 4))) return src
+            }
+        }
+
+        if (tokens.length >= 2) {
+            const first = tokens[0]
+            const lastInitial = tokens[1].charAt(0)
+            for (const src of sources) {
+                const name = src.split('/').pop().toLowerCase().replace(/\.[^/.]+$/, '')
+                const parts = name.split(/\s+/)
+                if (parts[0] === first && parts[1] && parts[1].charAt(0) === lastInitial) return src
+            }
+        }
+
+        const candidates = [
+            ...extensions.map(ext => `/images/content/${slug}/${slug}.${ext}`),
+            ...extensions.map(ext => `/images/content/${slug}.${ext}`),
+        ]
+        for (const c of candidates) {
+            if (sources.includes(c)) return c
+        }
+
+        return null
+    }
+
+    const currentImageSrc = currentDisplayedWord ? findImageForWord(currentDisplayedWord) : null
+    const imageFallbacks = currentDisplayedWord ? (
+        currentImageSrc ? ["/images/content/ae.png"] : [
+            ...extensions.map(ext => `/images/content/${slugify(currentDisplayedWord)}/${slugify(currentDisplayedWord)}.${ext}`),
+            ...extensions.map(ext => `/images/content/${slugify(currentDisplayedWord)}.${ext}`),
+            "/images/content/ae.png"
+        ]
+    ) : ["/images/content/ae.png"]
+
 
     const statusCircleVisible = Boolean(profile.statusCircleVisible)
     const statusCircleVariant = statusCircleVisible ?
@@ -69,6 +145,8 @@ function NavProfileCard({ profile, expanded }) {
     return (
         <Card className={`nav-profile-card ${expandedClass}`}>
             <AvatarView src={profileSources}
+                        singleSrc={currentImageSrc}
+                        fallbackChain={imageFallbacks}
                         className={`nav-profile-card-avatar`}
                         alt={name}
                         cycleInterval={3000}/>
@@ -93,7 +171,8 @@ function NavProfileCard({ profile, expanded }) {
                 {roles?.length > 1 && (
                     <TextTyper strings={roles}
                                id={`role-typer`}
-                               className={`nav-profile-card-role`}/>
+                               className={`nav-profile-card-role`}
+                               onWordChange={(word) => setCurrentDisplayedWord(word)}/>
                 )}
 
                 {roles?.length === 1 && (
