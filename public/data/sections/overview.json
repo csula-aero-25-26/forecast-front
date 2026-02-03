@@ -1,57 +1,126 @@
 {
-    "title": {
-        "locales": {
-            "en": {
-                "title_short": "Overview",
-                "title_short_nav": "Project Overview",
-                "title_long_prefix": "This is our",
-                "title_long": "Project {{Overview}}"
-            }
-        }
-    },
-    "articles": [
-{
-    "id": 1,
-    "component": "ArticleTimeline",
+  "title": {
     "locales": {
+      "en": {
+        "title_short": "Overview",
+        "title_short_nav": "Project Overview",
+        "title_long_prefix": "A look at our",
+        "title_long": "{{F10.7}} Solar Flux Prediction"
+      }
+    }
+  },
+  "articles": [
+    {
+      "id": 1,
+      "component": "ArticleInlineList",
+      "locales": {},
+      "settings": {
+        "display_as_list_if_width_is_lower_than": 380
+      },
+      "items": [
+        {
+          "id": 1,
+          "label": "repo",
+          "link": {
+            "href": "https://github.com/csula-aero-25-26",
+            "tooltipString": "see_on_github"
+          },
+          "faIcon": "fa-brands fa-github"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "component": "ArticleText",
+      "locales": {
         "en": {
-            "title": ""
+          "title": "Short {{Overview}}"
         }
-    },
-    "settings": {
-        "order_items_by": "dateStart",
-        "order_items_sort": "desc"
-    },
-    "items": [
+      },
+      "settings": {},
+      "items": [
         {
-            "id": 1,
-            "img": "",
-            "faIcon": "fa-solid fa-paperclip",
-            "faIconColors": {"bg": "#000", "bgLight": "#000", "fill": "#FFF", "fillLight": "#FFF"},
-            "locales": {
-                "en": {
-                    "title": "{{Summary}}",
-                    "text": "Lorem Ipsum"
-                }
+          "id": 1,
+          "img": "images/content/233176526.png",
+          "locales": {
+            "en": {
+              "text": "<p>This project was created as a collaboration between {{CSULA}} and the {{Aerospace Corporation}}. Led by a student team in Fall 2025 - Spring 2026. The aim of the project was to develop a full stack application that complies with the critera set by Aerospace.</p> <p>Over the course of the academic year the students engaged in weekly meeetings both internally and with their advisor/liaisons to discuss progress and future plans. In accordance with course requirements and porofessinal standards, documentation was created a maintained throughtout the process.</p>"
             }
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "component": "ArticleInfoList",
+      "locales": {
+        "en": {
+          "title": "{{Tech}} Stack"
+        }
+      },
+      "settings": {},
+      "items": [
+        {
+          "id": 1,
+          "faIcon": "fa-brands fa-python",
+          "locales": {
+            "en": {
+              "title": "{{Machine}} Learning",
+              "text": "PLACEHOLDER TEXT"
+            }
+          }
         },
-
         {
-            "id": 2,
-            "img": "",
-            "faIcon": "fa-solid fa-file",
-            "faIconColors": {"bg": "#000", "bgLight": "#000", "fill": "#FFF", "fillLight": "#FFF"},
-            "locales": {
-                "en": {
-                    "title": "{{Proposal}}",
-                    "text": "<p><u>Objective</u>: Develop a new machine learning/AI forecast of the solar radio flux (F10.7) index</p> <p><u>Description</u>: The solar radio flux at 10.7 cm (F10.7) is a useful geomagnetic index that correlates to solar activity. This index is used by several space weather models including models that predict atmospheric density and consequently satellite drag. Here, we propose develop a machine learning forecast of F10.7 out to a forecast horizon of at least 7 days. The index is correlated with several other space environment observables and has a long dataset of potential input data going back decades.</p><p><u>Expected Outcome</u>: The results from the new machine learning model can be integrated into several space weather decision tools, allowing for better prediction of space environment hazards and satellite drag estimations. If novel machine learning techniques are employed, these can be utilized in other space weather forecast models under development.</p>"
-                }
+          "id": 2,
+          "faIcon": "fa-brands fa-spr",
+          "locales": {
+            "en": {
+              "title": "{{Android}} Development",
+              "text": ""
             }
+          }
+        },
+        {
+          "id": 3,
+          "faIcon": "fa-brands fa-react",
+          "locales": {
+            "en": {
+              "title": "{{React Native}} Development",
+              "text": ""
+            }
+          }
+        },
+        {
+          "id": 4,
+          "faIcon": "fa-brands fa-flutter",
+          "locales": {
+            "en": {
+              "title": "{{Flutter}} Development",
+              "text": ""
+            }
+          }
+        },
+        {
+          "id": 5,
+          "faIcon": "fa-solid fa-code",
+          "locales": {
+            "en": {
+              "title": "{{API}} Integration",
+              "text": ""
+            }
+          }
+        },
+        {
+          "id": 6,
+          "faIcon": "fa-solid fa-cogs",
+          "locales": {
+            "en": {
+              "title": "{{State}} Management",
+              "text": ""
+            }
+          }
         }
-    ]
-}
-
-
-        
-    ]
+      ]
+    }
+  ]
 }
