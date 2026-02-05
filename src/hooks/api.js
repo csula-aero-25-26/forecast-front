@@ -177,49 +177,47 @@ const handlers = {
   },
 
   /**
-   * Fetch list of available prediction models
+   * Get list of available prediction models
+   * Returns hardcoded list since backend doesn't expose /models endpoint
    * @return {Promise<{success: boolean, data?: Object, error?: String}>}
    */
   getModels: async () => {
-    try {
-      const response = await fetch("/api/input/models", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return {
-        success: true,
-        data: data,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.message,
-      };
-    }
+    // Return default model list - matches the available model in the backend
+    return {
+      success: true,
+      data: {
+        count: 1,
+        models: [
+          {
+            model_id: "lgb_f107_lag27_ap_lag3",
+            family: "LightGBM",
+            description: "LightGBM model using 27-day F10.7 lag and 3-day AP lag features",
+            created_at: null,
+          },
+        ],
+      },
+    };
   },
 
   /**
-   * Make a prediction with a specific model and horizon days
+   * Make a prediction with a specific model and horizon days using latest data
    * @param {String} modelId - The model ID to use for prediction
    * @param {Number} horizonDays - Number of days ahead to predict
    * @return {Promise<{success: boolean, data?: Object, error?: String}>}
    */
   makePrediction: async (modelId, horizonDays) => {
     try {
-      const response = await fetch(`/api/input/predict/${modelId}/${horizonDays}`, {
-        method: "POST",
+      // Build query parameters
+      const params = new URLSearchParams({
+        modelId: modelId,
+        horizonDays: horizonDays.toString(),
+      });
+
+      const response = await fetch(`/api/input/predict-latest-v2?${params.toString()}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({}),
       });
 
       if (!response.ok) {
@@ -228,9 +226,13 @@ const handlers = {
       }
 
       const data = await response.json();
+      // Add horizonDays to the response data for component display
       return {
         success: true,
-        data: data,
+        data: {
+          ...data,
+          horizon_days: horizonDays,
+        },
       };
     } catch (error) {
       return {
