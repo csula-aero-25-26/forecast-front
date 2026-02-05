@@ -178,7 +178,6 @@ const handlers = {
 
   /**
    * Get list of available prediction models
-   * Returns hardcoded list since backend doesn't expose /models endpoint
    * @return {Promise<{success: boolean, data?: Object, error?: String}>}
    */
   getModels: async () => {
