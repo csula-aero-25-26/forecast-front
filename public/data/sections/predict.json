@@ -3,16 +3,21 @@
     "locales": {
       "en": {
         "title_short": "Predictions",
-        "title_short_nav": "Predictions",
-        "title_long_prefix": "Get the latest",
-        "title_long": "F10.7 Solar Flux Forecast"
+        "title_short_nav": "Solar Flux Predictions",
+        "title_long_prefix": "Generate",
+        "title_long": "F10.7 Solar Flux {{Predictions}}"
       }
     }
   },
   "articles": [
     {
-      "id": "prediction-latest",
-      "component": "ArticleCustom"
+      "id": "prediction-tool",
+      "component": "ArticlePrediction",
+      "locales": {
+        "en": {
+          "title": "Prediction Generation"
+        }
+      }
     }
   ]
 }

@@ -17,6 +17,7 @@ import ArticleTimeline from "/src/components/articles/ArticleTimeline.jsx";
 import ArticleChart from "/src/components/articles/ArticleChart.jsx";
 import ArticleDateRange from "/src/components/articles/ArticleDateRange.jsx";
 import ArticleChatBox from "/src/components/articles/ArticleChatBox.jsx";
+import ArticlePrediction from "/src/components/articles/ArticlePrediction.jsx";
 
 
 import ArticleCustom from "/src/components/articles/ArticleCustom.jsx";
@@ -60,6 +61,7 @@ ArticleTimeline,
 ArticleChart,
 ArticleDateRange,
 ArticleChatBox,
+ArticlePrediction,
 ArticleCustom,
 };
 

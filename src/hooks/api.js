@@ -175,6 +175,70 @@ const handlers = {
       };
     }
   },
+
+  /**
+   * Fetch list of available prediction models
+   * @return {Promise<{success: boolean, data?: Object, error?: String}>}
+   */
+  getModels: async () => {
+    try {
+      const response = await fetch("/api/input/models", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  },
+
+  /**
+   * Make a prediction with a specific model and horizon days
+   * @param {String} modelId - The model ID to use for prediction
+   * @param {Number} horizonDays - Number of days ahead to predict
+   * @return {Promise<{success: boolean, data?: Object, error?: String}>}
+   */
+  makePrediction: async (modelId, horizonDays) => {
+    try {
+      const response = await fetch(`/api/input/predict/${modelId}/${horizonDays}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || errorData.message || `HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  },
 };
 
 const analytics = {
