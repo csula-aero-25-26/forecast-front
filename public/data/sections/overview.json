@@ -72,10 +72,10 @@
         },
         {
           "id": 2,
-          "faIcon": "fa-brands fa-spr",
+          "faIcon": "fa-brands fa-js",
           "locales": {
             "en": {
-              "title": "{{Android}} Development",
+              "title": "{{Place}} Holder",
               "text": ""
             }
           }
@@ -85,17 +85,17 @@
           "faIcon": "fa-brands fa-react",
           "locales": {
             "en": {
-              "title": "{{React Native}} Development",
+              "title": "{{Place}} Holder",
               "text": ""
             }
           }
         },
         {
           "id": 4,
-          "faIcon": "fa-brands fa-flutter",
+          "faIcon": "fa-brands fa-github",
           "locales": {
             "en": {
-              "title": "{{Flutter}} Development",
+              "title": "{{Place}} Holder",
               "text": ""
             }
           }
@@ -105,7 +105,7 @@
           "faIcon": "fa-solid fa-code",
           "locales": {
             "en": {
-              "title": "{{API}} Integration",
+              "title": "{{Place}} Holder",
               "text": ""
             }
           }
@@ -115,7 +115,7 @@
           "faIcon": "fa-solid fa-cogs",
           "locales": {
             "en": {
-              "title": "{{State}} Management",
+              "title": "{{Place}} Holder",
               "text": ""
             }
           }
