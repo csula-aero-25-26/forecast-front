@@ -7,12 +7,12 @@
     },
     "preloaderSettings": {
         "enabled": true,
-        "title": "CSULA X Aerospace",
-        "subtitle": "<b style='margine-center:3px'>Senior Design 2025-2026</b>",
+        "title": "CSULA X Aerospace<br><b style='margin-left:3px'>Senior Design 2025-2026</b>",
+        "subtitle": "Team 10 - Dr. Ye",
         "logoOffset": {
             "right": 14,
-            "top": 2,
-            "bottom": -10
+            "top": 1,
+            "bottom": 1
         }
     },
     "templateSettings": {

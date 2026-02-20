@@ -2,67 +2,139 @@
     "title": {
         "locales": {
             "en": {
-                "title_short": "Team",
-                "title_short_nav": "Meet The Team",
-                "title_long_prefix": "Our",
+                "title_short": "Meet the Team",
+                "title_short_nav": "Meet the Team",
+                "title_long_prefix": "Meet the",
                 "title_long": "{{Team}}"
             }
         }
     },
     "articles": [
         {
-    "id": 1,
-    "component": "ArticleText",
-    "locales": {
-        "en": {"title": ""}
-    },
-    "settings": {
-        "order_items_by": "id",
-        "order_items_sort": "asc"
-    },
-    "items": [
-        {
             "id": 1,
-            "img": "/public/images/content/Front/Weihao.jpg",
+            "component": "ArticlePortfolio",
             "locales": {
                 "en": {
-                    "text": "<p>{{Weihao Liu}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
+                    "category_all": "All",
+                    "category_ml": "Machine Learning",
+                    "category_be": "Back End",
+                    "category_fe": "Front End"
                 }
-            }
-        },
-
-        {
-            "id": 2,
-            "img": "/public/images/content/Front/Emily.jpg",
-            "locales": {
-                "en": {
-                    "text": "<p>{{Emily Lopez}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
+            },
+            "settings": {
+                "categorize_by": ["category_ml", "category_be", "category_fe"],
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "categoryId": "category_be",
+                    "img": "/images/content/Back/Daniel G.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Daniel Gomez",
+                            "text": ""
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "categoryId": "category_ml",
+                    "img": "/images/content/Machine/Josh.png",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Joshua Hanscom",
+                            "text": "",
+                            "tags": ["Team Lead"]
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "categoryId": "category_ml",
+                    "img": "/images/content/Machine/Daniel H.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Daniel Herrera",
+                            "text": ""
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "categoryId": "category_fe",
+                    "img": "/images/content/Front/Weihao.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Weihao Liu",
+                            "text": ""
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "categoryId": "category_fe",
+                    "img": "/images/content/Front/Emily.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Emily Lopez",
+                            "text": ""
+                        }
+                    }
+                },
+                {
+                    "id": 6,
+                    "categoryId": "category_fe",
+                    "img": "/images/content/Front/Troy.png",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Troy Rana",
+                            "text": "",
+                            "tags": ["Team Lead"]
+                        }
+                    }
+                },
+                {
+                    "id": 7,
+                    "categoryId": "category_be",
+                    "img": "/images/content/Back/Marco.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Maro Rodriguez",
+                            "text": "",
+                            "tags": ["Team Lead"]
+                        }
+                    }
+                },
+                {
+                    "id": 8,
+                    "categoryId": "category_fe",
+                    "img": "/images/content/Front/Andy.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Andy Voong",
+                            "text": ""
+                        }
+                    }
                 }
-            }
-        },
-
-        {
-            "id": 3,
-            "img": "/public/images/content/Front/Troy.png",
-            "locales": {
-                "en": {
-                    "text": "<p>{{Troy Rana}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
-                }
-            }
-        },
-
-        {
-            "id": 2,
-            "img": "/public/images/content/Front/Andy.jpg",
-            "locales": {
-                "en": {
-                    "text": "<p>{{Andy Voong}} - Front End</p> e m p t y.</p><p>e m p t y</p>"
-                }
-            }
+            ]
         }
-
     ]
 }
-    ]
-}
-
