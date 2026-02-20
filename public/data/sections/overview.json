@@ -64,60 +64,70 @@
           "id": 1,
           "faIcon": "fa-brands fa-python",
           "locales": {
-            "en": {
-              "title": "{{Machine}} Learning",
-              "text": "PLACEHOLDER TEXT"
-            }
+            "en": { "title": "Python", "text": "" }
           }
         },
         {
           "id": 2,
-          "faIcon": "fa-brands fa-js",
+          "faIcon": "fa-brands fa-python",
           "locales": {
-            "en": {
-              "title": "{{Place}} Holder",
-              "text": ""
-            }
+            "en": { "title": "Scikit-learn", "text": "" }
           }
         },
         {
           "id": 3,
-          "faIcon": "fa-brands fa-react",
+          "faIcon": "fa-brands fa-python",
           "locales": {
-            "en": {
-              "title": "{{Place}} Holder",
-              "text": ""
-            }
+            "en": { "title": "Pandas", "text": "" }
           }
         },
         {
           "id": 4,
-          "faIcon": "fa-brands fa-github",
+          "faIcon": "fa-brands fa-python",
           "locales": {
-            "en": {
-              "title": "{{Place}} Holder",
-              "text": ""
-            }
+            "en": { "title": "FastAPI", "text": "" }
           }
         },
         {
           "id": 5,
-          "faIcon": "fa-solid fa-code",
+          "faIcon": "fa-brands fa-python",
           "locales": {
-            "en": {
-              "title": "{{Place}} Holder",
-              "text": ""
-            }
+            "en": { "title": "Jupyter", "text": "" }
           }
         },
         {
           "id": 6,
-          "faIcon": "fa-solid fa-cogs",
+          "faIcon": "fa-brands fa-python",
           "locales": {
-            "en": {
-              "title": "{{Place}} Holder",
-              "text": ""
-            }
+            "en": { "title": "Spring Boot", "text": "" }
+          }
+        },
+        {
+          "id": 7,
+          "faIcon": "fa-solid fa-database",
+          "locales": {
+            "en": { "title": "PostgreSQL", "text": "" }
+          }
+        },
+        {
+          "id": 8,
+          "faIcon": "fa-brands fa-react",
+          "locales": {
+            "en": { "title": "React", "text": "" }
+          }
+        },
+        {
+          "id": 9,
+          "faIcon": "fa-brands fa-docker",
+          "locales": {
+            "en": { "title": "Docker", "text": "" }
+          }
+        },
+        {
+          "id": 10,
+          "faIcon": "fa-brands fa-git-alt",
+          "locales": {
+            "en": { "title": "Git", "text": "" }
           }
         }
       ]
