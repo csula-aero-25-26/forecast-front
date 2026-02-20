@@ -2,7 +2,6 @@ import "./ArticlePrediction.scss"
 import React, { useState, useEffect } from 'react'
 import Article from "/src/components/articles/base/Article.jsx"
 import StandardButton from "/src/components/buttons/StandardButton.jsx"
-import Input from "/src/components/forms/fields/Input.jsx"
 import { useApi } from "/src/hooks/api.js"
 
 /**
@@ -47,6 +46,9 @@ function getModelShortName(modelId, description) {
     // Fallback to extracting from model_id
     const modelTypeMap = {
         'lgb_f107_lag27_ap_lag3': 'LightGBM',
+        'lgb_f107_lag27_ap_lag3_horizon_1': 'LightGBM',
+        'linereg_flux_27_lags_ssn_horizon_7': 'Linear Regression',
+        'presistence_horizon_7': 'Persistence',
         'rf-v2-aplags': 'Random Forest',
         'lstm': 'LSTM',
     };
@@ -58,6 +60,8 @@ function getModelShortName(modelId, description) {
     // Extract from model_id (e.g., "lgb_" -> "LightGBM")
     if (modelId.startsWith('lgb_')) return 'LightGBM';
     if (modelId.startsWith('rf_') || modelId.startsWith('rf-')) return 'Random Forest';
+    if (modelId.startsWith('linreg_') || modelId.startsWith('lingreg-')) return 'Linear Regression';
+    if (modelId.startsWith('persistence_') || modelId.startsWith('persistence-')) return 'Persistence';
     if (modelId.startsWith('lstm_') || modelId.startsWith('lstm-')) return 'LSTM';
     
     // Last resort: capitalize first part
@@ -119,7 +123,10 @@ function ArticlePredictionContent() {
                     const modelList = response.data.models || [];
                     setModels(modelList);
                     if (modelList.length > 0) {
-                        setSelectedModel(modelList[0].model_id);
+                        const first = modelList[0];
+                        setSelectedModel(first.model_id);
+                        const horizons = first.available_horizon_days?.length ? first.available_horizon_days : [1];
+                        setHorizonDays(String(horizons[0]));
                     }
                 } else {
                     setError(response.error || "Failed to fetch models");
@@ -134,18 +141,30 @@ function ArticlePredictionContent() {
         fetchModels();
     }, []);
 
-    // Find the selected model object to get its description
+    // Find the selected model object and its available horizon days
     const selectedModelObj = models.find(m => m.model_id === selectedModel);
+    const availableHorizonDays = selectedModelObj?.available_horizon_days?.length
+        ? selectedModelObj.available_horizon_days
+        : [1];
+
+    // When model changes, set horizon to first available for that model
+    const handleModelChange = (e) => {
+        const modelId = e.target.value;
+        setSelectedModel(modelId);
+        const model = models.find(m => m.model_id === modelId);
+        const horizons = model?.available_horizon_days?.length ? model.available_horizon_days : [1];
+        setHorizonDays(horizons.length ? String(horizons[0]) : "");
+    };
 
     const handlePredict = async () => {
         if (!selectedModel || !horizonDays) {
-            setError("Please select a model and enter horizon days");
+            setError("Please select a model and a horizon");
             return;
         }
 
         const horizonDaysNum = parseInt(horizonDays, 10);
         if (isNaN(horizonDaysNum) || horizonDaysNum < 1) {
-            setError("Please enter a valid number of horizon days (1 or more)");
+            setError("Please select a valid horizon");
             return;
         }
 
@@ -184,7 +203,7 @@ function ArticlePredictionContent() {
                                 id="model-select"
                                 className="article-prediction-select"
                                 value={selectedModel}
-                                onChange={(e) => setSelectedModel(e.target.value)}
+                                onChange={handleModelChange}
                                 disabled={loading || models.length === 0}
                             >
                                 {models.length === 0 ? (
@@ -207,19 +226,26 @@ function ArticlePredictionContent() {
                         </div>
 
                         <div className="article-prediction-control-group">
-                            <label htmlFor="horizon-days-input" className="article-prediction-label">
+                            <label htmlFor="horizon-days-select" className="article-prediction-label">
                                 Horizon Days:
                             </label>
-                            <Input
-                                id="horizon-days-input"
-                                name="horizonDays"
-                                type="number"
-                                model={horizonDays}
-                                setModel={setHorizonDays}
-                                placeholder="Enter number of days"
-                                className="article-prediction-input"
-                                required={true}
-                            />
+                            <select
+                                id="horizon-days-select"
+                                className="article-prediction-select"
+                                value={horizonDays}
+                                onChange={(e) => setHorizonDays(e.target.value)}
+                                disabled={loading || availableHorizonDays.length === 0}
+                            >
+                                {availableHorizonDays.length === 0 ? (
+                                    <option value="">No horizon available</option>
+                                ) : (
+                                    availableHorizonDays.map((days) => (
+                                        <option key={days} value={String(days)}>
+                                            {days} day{days !== 1 ? "s" : ""}
+                                        </option>
+                                    ))
+                                )}
+                            </select>
                         </div>
 
                         <div className="article-prediction-button-wrapper">
@@ -229,7 +255,7 @@ function ArticlePredictionContent() {
                                 faIcon="fa-solid fa-sun"
                                 variant="primary"
                                 status={
-                                    loading || !selectedModel || !horizonDays
+                                    loading || !selectedModel || !horizonDays || availableHorizonDays.length === 0
                                         ? StandardButton.Status.DISABLED
                                         : StandardButton.Status.ENABLED
                                 }

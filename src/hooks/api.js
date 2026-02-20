@@ -19,6 +19,18 @@ export const useApi = () => {
   };
 };
 
+/**
+ * Parse available horizon days from a model_id string (e.g. "lgb_..._horizon_1" -> [1], "linreg_..._horizon_7" -> [7]).
+ * @param {String} modelId
+ * @return {Number[]} Sorted unique horizon day values
+ */
+function parseHorizonDaysFromModelId(modelId) {
+  if (!modelId || typeof modelId !== "string") return [];
+  const matches = modelId.matchAll(/horizon_(\d+)/gi);
+  const days = [...matches].map((m) => parseInt(m[1], 10)).filter((n) => !isNaN(n) && n >= 1);
+  return [...new Set(days)].sort((a, b) => a - b);
+}
+
 const validators = {
   /**
    * @param {String} name
@@ -177,25 +189,47 @@ const handlers = {
   },
 
   /**
-   * Get list of available prediction models
-   * @return {Promise<{success: boolean, data?: Object, error?: String}>}
+   * Get list of available prediction models from backend.
+   * Supports both model-service shape { models: [...] } and Spring list response.
+   * Each model is normalized to { model_id, family, description, available_horizon_days }.
+   * available_horizon_days is derived from model_id (e.g. horizon_1 -> [1], horizon_7 -> [7]).
+   * @return {Promise<{success: boolean, data?: { models: Array }, error?: String}>}
    */
   getModels: async () => {
-    // Return default model list - matches the available model in the backend
-    return {
-      success: true,
-      data: {
-        count: 1,
-        models: [
-          {
-            model_id: "lgb_f107_lag27_ap_lag3",
-            family: "LightGBM",
-            description: "LightGBM model using 27-day F10.7 lag and 3-day AP lag features",
-            created_at: null,
-          },
-        ],
-      },
-    };
+    try {
+      const response = await fetch("/api/models", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const rawList = Array.isArray(data) ? data : (data.models || []);
+      const models = rawList.map((m) => {
+        const modelId = m.model_id ?? m.modelId ?? "";
+        return {
+          model_id: modelId,
+          family: m.family ?? "",
+          description: m.description ?? "",
+          available_horizon_days: parseHorizonDaysFromModelId(modelId),
+        };
+      });
+
+      return {
+        success: true,
+        data: { models },
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
   },
 
   /**
