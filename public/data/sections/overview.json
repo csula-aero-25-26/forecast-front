@@ -69,6 +69,7 @@
         },
         {
           "id": 2,
+          "img": "/images/content/TechStack/Scikit-LearnInversed.png",
           "faIcon": "fa-brands fa-python",
           "locales": {
             "en": { "title": "Scikit-learn", "text": "" }
@@ -76,6 +77,7 @@
         },
         {
           "id": 3,
+          "img": "/images/content/TechStack/PandasInversed.png",
           "faIcon": "fa-brands fa-python",
           "locales": {
             "en": { "title": "Pandas", "text": "" }
@@ -83,6 +85,7 @@
         },
         {
           "id": 4,
+          "img": "/images/content/TechStack/FastAPI.png",
           "faIcon": "fa-brands fa-python",
           "locales": {
             "en": { "title": "FastAPI", "text": "" }
@@ -90,6 +93,7 @@
         },
         {
           "id": 5,
+          "img": "/images/content/TechStack/Jupyter.png",
           "faIcon": "fa-brands fa-python",
           "locales": {
             "en": { "title": "Jupyter", "text": "" }
@@ -97,6 +101,7 @@
         },
         {
           "id": 6,
+          "img": "/images/content/TechStack/SpringBootInversed.png",
           "faIcon": "fa-brands fa-python",
           "locales": {
             "en": { "title": "Spring Boot", "text": "" }
