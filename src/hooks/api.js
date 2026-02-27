@@ -233,25 +233,26 @@ const handlers = {
   },
 
   /**
-   * Make a prediction with a specific model and horizon days using latest data
+   * Make a prediction with a specific model
    * @param {String} modelId - The model ID to use for prediction
-   * @param {Number} horizonDays - Number of days ahead to predict
+   * @param {Number} horizonDays - Number of days ahead to predict 
    * @return {Promise<{success: boolean, data?: Object, error?: String}>}
    */
   makePrediction: async (modelId, horizonDays) => {
     try {
-      // Build query parameters
       const params = new URLSearchParams({
         modelId: modelId,
-        horizonDays: horizonDays.toString(),
       });
 
-      const response = await fetch(`/api/input/predict-latest-v2?${params.toString()}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `/api/inference/predict-latest-v2-phase2?${params.toString()}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -259,12 +260,17 @@ const handlers = {
       }
 
       const data = await response.json();
-      // Add horizonDays to the response data for component display
+
+      // Backend returns: { predictionId, predictedValue, modelId, horizonDays }
+      // Normalize to what the components already expect.
+      const resolvedHorizon = data.horizonDays ?? horizonDays;
       return {
         success: true,
         data: {
           ...data,
-          horizon_days: horizonDays,
+          predicted_flux: data.predicted_flux ?? data.predictedValue,
+          model_id: data.model_id ?? data.modelId,
+          horizon_days: resolvedHorizon,
         },
       };
     } catch (error) {
