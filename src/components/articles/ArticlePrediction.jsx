@@ -3,6 +3,15 @@ import React, { useState, useEffect } from 'react'
 import Article from "/src/components/articles/base/Article.jsx"
 import StandardButton from "/src/components/buttons/StandardButton.jsx"
 import { useApi } from "/src/hooks/api.js"
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer,
+} from "recharts";
 
 /**
  * @param {ArticleDataWrapper} dataWrapper
@@ -99,6 +108,75 @@ function getModelDisplayName(modelId, description) {
 }
 
 /**
+ * Build chart data from the latest feature vector and predicted value.
+ * Uses feature index on the X axis and feature value on the Y axis.
+ * The final point represents the predicted flux.
+ * @param {Object|null} result - prediction result from backend
+ * @return {Array<Object>|null}
+ */
+function buildPredictionChartData(result) {
+    if (!result || !result.features) {
+        return null;
+    }
+
+    // Helper to extract a numeric lag and base name from keys like:
+    // "f107_lag27", "f107_lag_27", "ap_lag3", "ap_lag_3"
+    const parseLagKey = (key) => {
+        const match = key.match(/^(.*?)(?:_?lag[_-]?)(\d+)$/i);
+        if (!match) {
+            return null;
+        }
+        const base = match[1] || "";
+        const lag = parseInt(match[2], 10);
+        if (Number.isNaN(lag)) {
+            return null;
+        }
+        return { base, lag };
+    };
+
+    // Convert numeric-valued features into a sequence and sort by:
+    // 1) base feature name (e.g., "ap", "f107")
+    // 2) numeric lag (e.g., 27, 26, ..., 1) when available
+    const entries = Object.entries(result.features)
+        .filter(([_, value]) => typeof value === "number")
+        .sort(([aKey], [bKey]) => {
+            const aLag = parseLagKey(aKey);
+            const bLag = parseLagKey(bKey);
+
+            // If both look like lag keys, sort by base then numeric lag (descending)
+            if (aLag && bLag) {
+                if (aLag.base !== bLag.base) {
+                    return aLag.base.localeCompare(bLag.base);
+                }
+                // Higher lag number (further in the past) first: 27, 26, ..., 1
+                return bLag.lag - aLag.lag;
+            }
+
+            // Fallback to simple alphabetical order
+            return aKey.localeCompare(bKey);
+        });
+
+    const data = entries.map(([key, value], idx) => ({
+        idx,
+        value: Number(value),
+        label: key,
+        isPrediction: false,
+    }));
+
+    const predictedFlux = result.predicted_flux ?? result.predictedValue;
+    if (typeof predictedFlux === "number" && !Number.isNaN(predictedFlux)) {
+        data.push({
+            idx: data.length,
+            value: Number(predictedFlux),
+            label: "Predicted flux",
+            isPrediction: true,
+        });
+    }
+
+    return data.length ? data : null;
+}
+
+/**
  * Main prediction content component
  * @return {JSX.Element}
  * @constructor
@@ -185,6 +263,8 @@ function ArticlePredictionContent() {
             setLoading(false);
         }
     };
+
+    const chartData = buildPredictionChartData(result);
 
     return (
         <div className="article-prediction-content">
@@ -283,6 +363,55 @@ function ArticlePredictionContent() {
                                     <strong>Horizon Days:</strong> {result.horizon_days || "N/A"}
                                 </p>
                             </div>
+
+                            {chartData && (
+                                <div className="article-prediction-chart">
+                                    <p className="article-prediction-chart-title">
+                                        <strong>Latest feature vector and predicted flux:</strong>
+                                    </p>
+                                    <ResponsiveContainer width="100%" height={300}>
+                                        <LineChart
+                                            data={chartData}
+                                            margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis
+                                                dataKey="idx"
+                                                label={{
+                                                    value: "Feature index (ordered)",
+                                                    position: "insideBottomRight",
+                                                    offset: -5,
+                                                }}
+                                            />
+                                            <YAxis />
+                                            <Tooltip
+                                                formatter={(value, _name, props) => {
+                                                    const label = props?.payload?.label || "Value";
+                                                    return [value, label];
+                                                }}
+                                                contentStyle={{
+                                                    backgroundColor: "var(--theme-boards-background)",
+                                                    borderColor: "var(--theme-standard-borders)",
+                                                    color: "var(--theme-texts)",
+                                                }}
+                                                itemStyle={{
+                                                    color: "var(--theme-texts)",
+                                                }}
+                                                labelStyle={{
+                                                    color: "var(--theme-texts)",
+                                                }}
+                                            />
+                                            <Line
+                                                type="monotone"
+                                                dataKey="value"
+                                                stroke="#ffce00"
+                                                dot={{ r: 3 }}
+                                                activeDot={{ r: 6 }}
+                                            />
+                                        </LineChart>
+                                    </ResponsiveContainer>
+                                </div>
+                            )}
                         </div>
                     )}
                 </>
