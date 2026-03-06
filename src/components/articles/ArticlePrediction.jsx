@@ -134,11 +134,11 @@ function buildPredictionChartData(result) {
         return { base, lag };
     };
 
-    // Convert numeric-valued features into a sequence and sort by:
-    // 1) base feature name (e.g., "ap", "f107")
-    // 2) numeric lag (e.g., 27, 26, ..., 1) when available
+    // Convert numeric-valued features into a sequence and sort from greatest to least. 
+    // Now only displays features that start with "f107"
+
     const entries = Object.entries(result.features)
-        .filter(([_, value]) => typeof value === "number")
+        .filter(([key, value]) => key?.toLowerCase().startsWith("f107") && typeof value === "number")
         .sort(([aKey], [bKey]) => {
             const aLag = parseLagKey(aKey);
             const bLag = parseLagKey(bKey);
@@ -368,12 +368,13 @@ function ArticlePredictionContent() {
                                 <p>
                                     <strong>Horizon Days:</strong> {result.horizon_days || "N/A"}
                                 </p>
+                                <p></p>
                             </div>
 
                             {chartData && (
                                 <div className="article-prediction-chart">
                                     <p className="article-prediction-chart-title">
-                                        <strong>Latest feature vector and predicted flux:</strong>
+                                        <h5>Latest Feature Vector and Predicted Flux:</h5>
                                     </p>
                                     <ResponsiveContainer width="100%" height={300}>
                                         <LineChart
