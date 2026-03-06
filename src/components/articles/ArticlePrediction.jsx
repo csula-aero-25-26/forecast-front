@@ -272,6 +272,53 @@ function ArticlePredictionContent() {
 
     const chartData = buildPredictionChartData(result);
 
+    // Give the flux point a unique look
+    const renderPredictionDot = (props, { active = false } = {}) => {
+            const { cx, cy, payload, stroke } = props || {};
+            if (typeof cx !== "number" || typeof cy !== "number") {
+                return null;
+            }
+
+            // Highlight the final predicted point
+            if (payload?.isPrediction) {
+                const starPoints = (centerX, centerY, outerR = 9, innerR = 4.5, spikes = 5) => {
+                    const step = Math.PI / spikes;
+                    let rot = -Math.PI / 2;
+                    const pts = [];
+                    for (let i = 0; i < spikes * 2; i++) {
+                        const r = i % 2 === 0 ? outerR : innerR;
+                        pts.push(`${centerX + Math.cos(rot) * r},${centerY + Math.sin(rot) * r}`);
+                        rot += step;
+                    }
+                    return pts.join(" ");
+                };
+
+                const outerR = active ? 11 : 9;
+                const innerR = active ? 5.5 : 4.5;
+
+                return (
+                    <polygon
+                        points={starPoints(cx, cy, outerR, innerR)}
+                        fill="#FFFF"
+                        stroke="var(--theme-boards-background)"
+                        strokeWidth={2}
+                    />
+                );
+            }
+
+            const r = active ? 4 : 5;
+            return (
+                <circle
+                    cx={cx}
+                    cy={cy}
+                    r={r}
+                    fill={stroke || "#ffce00"}
+                    stroke="var(--theme-boards-background)"
+                    strokeWidth={1.5}
+                />
+            );
+        };
+
     return (
         <div className="article-prediction-content">
             {loadingModels ? (
@@ -412,8 +459,8 @@ function ArticlePredictionContent() {
                                                 type="monotone"
                                                 dataKey="value"
                                                 stroke="#ffce00"
-                                                dot={{ r: 3 }}
-                                                activeDot={{ r: 6 }}
+                                                dot={(props) => renderPredictionDot(props, {active: false})}
+                                                activeDot={(props) => renderPredictionDot(props, {active: true})}
                                             />
                                         </LineChart>
                                     </ResponsiveContainer>
