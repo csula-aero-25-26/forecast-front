@@ -5,7 +5,7 @@
             "faIcon": "fa-regular fa-user",
             "locales": {
                 "en": {
-                    "title": "Home"
+                    "title": "Overview"
                 }
             }
         },
@@ -23,7 +23,7 @@
             "faIcon": "fa-regular fa-folder-open",
             "locales": {
                 "en": {
-                    "title": "Showcase"
+                    "title": "Prediction"
                 }
             }
         },
@@ -32,7 +32,7 @@
             "faIcon": "fa-regular fa-object-ungroup",
             "locales": {
                 "en": {
-                    "title": "More"
+                    "title": "Team"
                 }
             }
         }
