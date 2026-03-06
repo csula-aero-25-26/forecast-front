@@ -299,7 +299,7 @@ function ArticlePredictionContent() {
                 return (
                     <polygon
                         points={starPoints(cx, cy, outerR, innerR)}
-                        fill="#FFFF"
+                        fill="#FF5C00"
                         stroke="var(--theme-boards-background)"
                         strokeWidth={2}
                     />
