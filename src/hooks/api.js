@@ -31,6 +31,17 @@ function parseHorizonDaysFromModelId(modelId) {
   return [...new Set(days)].sort((a, b) => a - b);
 }
 
+/**
+ * Get base model key (model_id without _horizon_N suffix) for grouping.
+ * e.g. "lgb_f107_lag27_ap_lag3_horizon_1" -> "lgb_f107_lag27_ap_lag3"
+ * @param {String} modelId
+ * @return {String}
+ */
+function getModelBaseKey(modelId) {
+  if (!modelId || typeof modelId !== "string") return modelId || "";
+  return modelId.replace(/_horizon_\d+$/i, "").trim() || modelId;
+}
+
 const validators = {
   /**
    * @param {String} name
@@ -190,9 +201,8 @@ const handlers = {
 
   /**
    * Get list of available prediction models from backend.
-   * Supports both model-service shape { models: [...] } and Spring list response.
-   * Each model is normalized to { model_id, family, description, available_horizon_days }.
-   * available_horizon_days is derived from model_id (e.g. horizon_1 -> [1], horizon_7 -> [7]).
+   * Groups by base key (model_id without _horizon_N) so one entry per unique model.
+   * Each entry has model_key, model_id, family, description, available_horizon_days (all horizons), model_id_for_horizon.
    * @return {Promise<{success: boolean, data?: { models: Array }, error?: String}>}
    */
   getModels: async () => {
@@ -210,7 +220,7 @@ const handlers = {
 
       const data = await response.json();
       const rawList = Array.isArray(data) ? data : (data.models || []);
-      const models = rawList.map((m) => {
+      const rawModels = rawList.map((m) => {
         const modelId = m.model_id ?? m.modelId ?? "";
         return {
           model_id: modelId,
@@ -219,6 +229,30 @@ const handlers = {
           available_horizon_days: parseHorizonDaysFromModelId(modelId),
         };
       });
+
+      const byBase = new Map();
+      for (const m of rawModels) {
+        const base = getModelBaseKey(m.model_id);
+        if (!byBase.has(base)) {
+          byBase.set(base, {
+            model_key: base,
+            model_id: m.model_id,
+            family: m.family,
+            description: m.description,
+            available_horizon_days: [],
+            model_id_for_horizon: {},
+          });
+        }
+        const group = byBase.get(base);
+        for (const d of m.available_horizon_days) {
+          if (!group.available_horizon_days.includes(d)) group.available_horizon_days.push(d);
+          group.model_id_for_horizon[d] = m.model_id;
+        }
+      }
+      const models = Array.from(byBase.values()).map((g) => ({
+        ...g,
+        available_horizon_days: g.available_horizon_days.sort((a, b) => a - b),
+      }));
 
       return {
         success: true,

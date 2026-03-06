@@ -202,7 +202,7 @@ function ArticlePredictionContent() {
                     setModels(modelList);
                     if (modelList.length > 0) {
                         const first = modelList[0];
-                        setSelectedModel(first.model_id);
+                        setSelectedModel(first.model_key);
                         const horizons = first.available_horizon_days?.length ? first.available_horizon_days : [1];
                         setHorizonDays(String(horizons[0]));
                     }
@@ -220,16 +220,16 @@ function ArticlePredictionContent() {
     }, []);
 
     // Find the selected model object and its available horizon days
-    const selectedModelObj = models.find(m => m.model_id === selectedModel);
+    const selectedModelObj = models.find(m => m.model_key === selectedModel);
     const availableHorizonDays = selectedModelObj?.available_horizon_days?.length
         ? selectedModelObj.available_horizon_days
         : [1];
 
     // When model changes, set horizon to first available for that model
     const handleModelChange = (e) => {
-        const modelId = e.target.value;
-        setSelectedModel(modelId);
-        const model = models.find(m => m.model_id === modelId);
+        const modelKey = e.target.value;
+        setSelectedModel(modelKey);
+        const model = models.find(m => m.model_key === modelKey);
         const horizons = model?.available_horizon_days?.length ? model.available_horizon_days : [1];
         setHorizonDays(horizons.length ? String(horizons[0]) : "");
     };
@@ -246,12 +246,18 @@ function ArticlePredictionContent() {
             return;
         }
 
+        const modelIdToUse = selectedModelObj?.model_id_for_horizon?.[horizonDaysNum];
+        if (!modelIdToUse) {
+            setError("No model available for the selected horizon");
+            return;
+        }
+
         setLoading(true);
         setError(null);
         setResult(null);
 
         try {
-            const response = await handlers.makePrediction(selectedModel, horizonDaysNum);
+            const response = await handlers.makePrediction(modelIdToUse, horizonDaysNum);
             if (response.success) {
                 setResult(response.data);
             } else {
@@ -290,8 +296,8 @@ function ArticlePredictionContent() {
                                     <option value="">No models available</option>
                                 ) : (
                                     models.map((model) => (
-                                        <option key={model.model_id} value={model.model_id}>
-                                            {getModelShortName(model.model_id, model.description)}
+                                        <option key={model.model_key} value={model.model_key}>
+                                            {getModelShortName(model.model_key, model.description)}
                                         </option>
                                     ))
                                 )}
