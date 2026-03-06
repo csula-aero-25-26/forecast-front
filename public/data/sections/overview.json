@@ -85,7 +85,7 @@
         },
         {
           "id": 4,
-          "img": "/images/content/TechStack/FastAPI.png",
+          "img": "/images/content/TechStack/FastApiInversed.png",
           "faIcon": "fa-brands fa-python",
           "locales": {
             "en": { "title": "FastAPI", "text": "" }
@@ -93,7 +93,7 @@
         },
         {
           "id": 5,
-          "img": "/images/content/TechStack/Jupyter.png",
+          "img": "/images/content/TechStack/JupyterInversed.png",
           "faIcon": "fa-brands fa-python",
           "locales": {
             "en": { "title": "Jupyter", "text": "" }
