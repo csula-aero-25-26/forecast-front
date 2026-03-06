@@ -47,8 +47,8 @@ $texts: #202521;
 $texts-inverted: #EEE;
 
 $base-container-bg: #F6FAF9;
-$base-container-bg-accent: #A18528;
-$base-popover-bg: #cae1d4;
+$base-container-bg-accent: #FFC46F;
+$base-popover-bg: #F6FAF9;
 $base-boards: #d2eed8;
 $base-info-badges: #c3e3cd;
 $empty: #e8f8ef;
@@ -84,7 +84,7 @@ $scrollbar-thumb: #FFC46F;
         /** NAV MOBILE BORDER: **/          $borders-nav-mobile-accent,
 
         /** NAV MOBILE HOVER BG: **/        $base-container-bg-accent,
-        /** NAV MOBILE HOVER: **/           $primary,
+        /** NAV MOBILE HOVER: **/           $secondary,
 
         /** NAV MOBILE SELECTED BG: **/     $primary,
         /** NAV MOBILE SELECTED: **/        $texts-inverted,
