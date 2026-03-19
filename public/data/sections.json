@@ -13,6 +13,12 @@
       "faIcon": "fa-solid fa-chart-line"
     },
     {
+      "id": "override",
+      "categoryId": "showcase",
+      "jsonPath": "/data/sections/override.json",
+      "faIcon": "fa-solid fa-arrows-turn-to-dots"
+    },
+    {
       "id": "compendium",
       "categoryId": "showcase",
       "jsonPath": "/data/sections/compendium.json",
@@ -22,7 +28,7 @@
       "id": "contact",
       "categoryId": "more",
       "jsonPath": "/data/sections/contact.json",
-      "faIcon": "fa-solid fa-pen-to-square"
+      "faIcon": "fa-solid fa-user-group"
     }
   ]
 }

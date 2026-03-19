@@ -20,12 +20,21 @@
       "items": [
         {
           "id": 1,
-          "label": "repo",
+          "label": "Repository",
           "link": {
             "href": "https://github.com/csula-aero-25-26",
             "tooltipString": "see_on_github"
           },
           "faIcon": "fa-brands fa-github"
+        },
+        {
+          "id": 2,
+          "label": "Ascent",
+          "link": {
+            "href": "https://ascent.cysun.org/project/project/view/254",
+            "tooltipString": "Documentation | SRS, SDD, etc."
+          },
+          "faIcon": "fa-solid fa-feather"
         }
       ]
     },
