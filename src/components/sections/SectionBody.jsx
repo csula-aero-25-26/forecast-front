@@ -45,24 +45,25 @@ function SectionBody({ section }) {
 SectionBody.Context = createContext({ dateRange: null, setDateRange: () => {} })
 
 SectionBody.ARTICLES = {
-ArticleCards,
-ArticleContactForm,
-ArticleFacts,
-ArticleInfoList,
-ArticleInlineList,
-ArticleNotFound,
-ArticlePortfolio,
-ArticleSkills,
-ArticleStack,
-ArticleTestimonials,
-ArticleText,
-ArticleThread,
-ArticleTimeline,
-ArticleChart,
-ArticleDateRange,
-ArticleChatBox,
-ArticlePrediction,
-ArticleCustom,
+    ArticleCards,
+    ArticleContactForm,
+    ArticleFacts,
+    ArticleInfoList,
+    ArticleInlineList,
+    ArticleNotFound,
+    ArticlePortfolio,
+    ArticleSkills,
+    ArticleStack,
+    ArticleTestimonials,
+    ArticleText,
+    ArticleThread,
+    ArticleTimeline,
+    ArticleChart,
+    ArticleDateRange,
+    ArticleChatBox,
+    ArticlePrediction,
+    ArticleCustom,
+    ArticleOverride
 };
 
 
