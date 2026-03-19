@@ -314,6 +314,76 @@ const handlers = {
       };
     }
   },
+
+  /**
+   * Get the latest feature vector that can be used for overrides.
+   * Backend response shape: { features: { ... } }
+   * @return {Promise<{success: boolean, data?: Object, error?: String}>}
+   */
+  getFeatures: async () => {
+    try {
+      const response = await fetch("/api/inference/get-features", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  },
+
+  /**
+   * Generate a prediction using manually supplied feature values.
+   * Backend request shape: { modelId, features }
+   * Backend response shape: { modelId, predictedValue, manualOverride: true }
+   * @param {String} modelId
+   * @param {Object} features
+   * @return {Promise<{success: boolean, data?: Object, error?: String}>}
+   */
+  manualOverride: async (modelId, features) => {
+    try {
+      const response = await fetch("/api/inference/manual-override", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          modelId,
+          features,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || errorData.message || `HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  },
 };
 
 const analytics = {
