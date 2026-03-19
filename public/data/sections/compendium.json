@@ -1,0 +1,131 @@
+{
+    "title": {
+        "locales": {
+            "en": {
+                "title_short": "compendium",
+                "title_short_nav": "Compendium",
+                "title_long_prefix": "Deprecated Articles are found here in",
+                "title_long": "The {{Compendium}}"
+            }
+        }
+    },
+    "articles": [
+    {
+        "id": 1,
+        "component": "ArticleTimeline",
+        "locales": {},
+        "items": [
+            {
+                "id": 1,
+                "img": "/images/content/Front/Emily.jpg",
+                "faIcon": "",
+                "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                "dateStart": {"year": 2025, "month": 10},
+                "dateEnd": {"year": 2025, "month": 11},
+                "locales": {
+                    "en": {
+                        "title": "Graph Parameters - {{Date Range Filter}}",
+                        "text": "Created as part of the varied user input effort. Was not adjusted for the dark-mode theme and was deprecated as we opted to aim for a more minimalist user experience.",
+                        "tags": ["Emily Lopez"]
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "component": "ArticleDateRange",
+        "locales": {
+            "en": {
+                "title": "Graph Parameters",
+                "start_label": "Start",
+                "end_label": "End"
+            }
+        },
+        "settings": {
+            "default_start": 2020,
+            "default_end": 2025
+        }
+    },
+    {
+        "id": 3,
+        "component": "ArticleTimeline",
+        "locales": {},
+        "items": [
+            {
+                "id": 1,
+                "img": "/images/content/Front/Andy.jpg",
+                "faIcon": "",
+                "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                "dateStart": {"year": 2025, "month": 11},
+                "dateEnd": {"year": 2025, "month": 11},
+                "locales": {
+                    "en": {
+                        "title": "User Input - {{Chatbox}}",
+                        "text": "Created when the scope of user input was much larger. As we came to understand the way ML models would be handled it was dropped. Only takes dark-mode.",
+                        "tags": ["Andy Voong"]
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "component": "ArticleChatBox",
+        "locales": {
+          "en": {
+            "title": "Interactive Chat Box"
+          }
+        },
+        "settings": {
+          "show_timestamp": true,
+          "placeholder": "Type your message...",
+          "bot_greeting": "Hello! How can I help you?"
+        }
+    },
+    {
+        "id": 5,
+        "component": "ArticleTimeline",
+        "locales": {},
+        "items": [
+            {
+                "id": 1,
+                "img": "/images/content/Front/Weihao.jpg",
+                "faIcon": "",
+                "faIconColors": {"bg": "", "bgLight": "", "fill": "", "fillLight": ""},
+                "dateStart": {"year": 2025, "month": 10},
+                "dateEnd": {"year": 2025, "month": 11},
+                "locales": {
+                    "en": {
+                        "title": "Prediction Generation - {{Model Config}}",
+                        "text": "Craeted as a draft of our current Prediction Generation. Many of the proposed features were ultimately not possible as we had envisioned. The article to generate the menu is old enough that reintroducing it for the purposes of this compendium is more effort than it is worth. A screenshot has been included for completeness",
+                        "tags": ["Weihao Liu"]
+                    }
+                }
+            }
+        ]
+    },
+    {
+      "id": 6,
+      "component": "ArticleText",
+      "locales": {
+        "en": {
+          "title": " "
+        }
+      },
+      "settings": {},
+      "items": [
+        {
+          "id": 1,
+          "img": "images/content/modelconfig.png",
+          "locales": {
+            "en": {
+              "text": " "
+            }
+          }
+        }
+      ]
+    }
+
+    ]
+}

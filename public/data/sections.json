@@ -31,6 +31,12 @@
       "faIcon": "fa-solid fa-tools"
     },
     {
+      "id": "compendium",
+      "categoryId": "showcase",
+      "jsonPath": "/data/sections/compendium.json",
+      "faIcon": "fa-solid fa-graduation-cap"
+    },
+    {
       "id": "contact",
       "categoryId": "more",
       "jsonPath": "/data/sections/contact.json",

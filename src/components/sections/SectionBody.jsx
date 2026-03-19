@@ -63,7 +63,7 @@ SectionBody.ARTICLES = {
     ArticleChatBox,
     ArticlePrediction,
     ArticleCustom,
-    ArticleOverride
+    // ArticleOverride
 };
 
 
