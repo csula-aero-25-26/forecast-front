@@ -10,15 +10,6 @@
             }
         },
         {
-            "id": "background",
-            "faIcon": "fa-regular fa-clock",
-            "locales": {
-                "en": {
-                    "title": "History"
-                }
-            }
-        },
-        {
             "id": "showcase",
             "faIcon": "fa-regular fa-folder-open",
             "locales": {

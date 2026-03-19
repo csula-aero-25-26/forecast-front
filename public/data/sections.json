@@ -7,28 +7,10 @@
       "faIcon": "fa-solid fa-address-card"
     },
     {
-      "id": "param",
-      "categoryId": "showcase",
-      "jsonPath": "/data/sections/param.json",
-      "faIcon": "fa-solid fa-tools"
-    },
-    {
-      "id": "generate",
-      "categoryId": "background",
-      "jsonPath": "/data/sections/generate.json",
-      "faIcon": "fa-solid fa-briefcase"
-    },
-    {
       "id": "predict",
       "categoryId": "showcase",
       "jsonPath": "/data/sections/predict.json",
       "faIcon": "fa-solid fa-chart-line"
-    },
-    {
-      "id": "chatbox",
-      "categoryId": "showcase",
-      "jsonPath": "/data/sections/chatbox.json",
-      "faIcon": "fa-solid fa-tools"
     },
     {
       "id": "compendium",
