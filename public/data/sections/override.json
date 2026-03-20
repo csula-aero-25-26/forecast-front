@@ -5,7 +5,7 @@
         "title_short": "Override",
         "title_short_nav": "Solar Flux Predictions - Override",
         "title_long_prefix": "Generate",
-        "title_long": "F10.7 Solar Flux {{Predictions}}"
+        "title_long": "F10.7 Solar Flux Prediction {{Override}}"
       }
     }
   },
