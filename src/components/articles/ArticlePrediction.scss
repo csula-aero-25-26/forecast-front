@@ -25,10 +25,12 @@
 }
 
 .article-prediction-label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
     color: var(--theme-texts);
+    border-bottom: 2px solid var(--theme-primary);
+    padding-bottom: 0.5rem;
 }
 
 .article-prediction-select {
