@@ -1,0 +1,23 @@
+{
+  "title": {
+    "locales": {
+      "en": {
+        "title_short": "Historical",
+        "title_short_nav": "Solar Flux History",
+        "title_long_prefix": "Explore",
+        "title_long": "F10.7 Solar Flux {{History}}"
+      }
+    }
+  },
+  "articles": [
+    {
+      "id": "historical-overview",
+      "component": "ArticleHistorical",
+      "locales": {
+        "en": {
+          "title": "Historical Data Overview"
+        }
+      }
+    }
+  ]
+}

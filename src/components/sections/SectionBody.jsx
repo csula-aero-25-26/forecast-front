@@ -19,8 +19,7 @@ import ArticleDateRange from "/src/components/articles/ArticleDateRange.jsx";
 import ArticleChatBox from "/src/components/articles/ArticleChatBox.jsx";
 import ArticlePrediction from "/src/components/articles/ArticlePrediction.jsx";
 import ArticleOverride from "/src/components/articles/ArticleOverride.jsx";
-import ArticleHistorical from "/src/components/articles/ArticleHistorical.jsx"
-
+import ArticleHistorical from "/src/components/articles/ArticleHistorical.jsx";
 
 import ArticleCustom from "/src/components/articles/ArticleCustom.jsx";
 
@@ -28,47 +27,48 @@ function SectionBody({ section }) {
   const parser = useParser();
   const articleDataWrappers = parser.parseSectionArticles(section);
 
-    const [dateRange, setDateRange] = useState(null)
+  const [dateRange, setDateRange] = useState(null);
 
-    return (
-        <div className={`section-body`}>
-            <SectionBody.Context.Provider value={{ dateRange, setDateRange }}>
-                {articleDataWrappers && articleDataWrappers.map((dataWrapper, key) => {
-                    const Component = SectionBody.ARTICLES[dataWrapper.component] || ArticleNotFound
-                    return <Component dataWrapper={dataWrapper}
-                                      id={key}
-                                      key={key}/>
-                })}
-            </SectionBody.Context.Provider>
-        </div>
-    )
+  return (
+    <div className={`section-body`}>
+      <SectionBody.Context.Provider value={{ dateRange, setDateRange }}>
+        {articleDataWrappers &&
+          articleDataWrappers.map((dataWrapper, key) => {
+            const Component =
+              SectionBody.ARTICLES[dataWrapper.component] || ArticleNotFound;
+            return <Component dataWrapper={dataWrapper} id={key} key={key} />;
+          })}
+      </SectionBody.Context.Provider>
+    </div>
+  );
 }
 
-SectionBody.Context = createContext({ dateRange: null, setDateRange: () => {} })
+SectionBody.Context = createContext({
+  dateRange: null,
+  setDateRange: () => {},
+});
 
 SectionBody.ARTICLES = {
-    ArticleCards,
-    ArticleContactForm,
-    ArticleFacts,
-    ArticleInfoList,
-    ArticleInlineList,
-    ArticleNotFound,
-    ArticlePortfolio,
-    ArticleSkills,
-    ArticleStack,
-    ArticleTestimonials,
-    ArticleText,
-    ArticleThread,
-    ArticleTimeline,
-    ArticleChart,
-    ArticleDateRange,
-    ArticleChatBox,
-    ArticlePrediction,
-    ArticleOverride,
-    ArticleHistorical,
-    ArticleCustom,
-    
+  ArticleCards,
+  ArticleContactForm,
+  ArticleFacts,
+  ArticleInfoList,
+  ArticleInlineList,
+  ArticleNotFound,
+  ArticlePortfolio,
+  ArticleSkills,
+  ArticleStack,
+  ArticleTestimonials,
+  ArticleText,
+  ArticleThread,
+  ArticleTimeline,
+  ArticleChart,
+  ArticleDateRange,
+  ArticleChatBox,
+  ArticlePrediction,
+  ArticleOverride,
+  ArticleHistorical,
+  ArticleCustom,
 };
-
 
 export default SectionBody;

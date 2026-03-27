@@ -1,6 +1,6 @@
-import "./ArticleHistorical.scss"
-import React, {useEffect, useState} from 'react'
-import Article from "/src/components/articles/base/Article.jsx"
+import "./ArticleHistorical.scss";
+import React, { useEffect, useState } from "react";
+import Article from "/src/components/articles/base/Article.jsx";
 
 /**
  * @param {ArticleDataWrapper} dataWrapper
@@ -9,19 +9,23 @@ import Article from "/src/components/articles/base/Article.jsx"
  * @constructor
  */
 function ArticleHistorical({ dataWrapper, id }) {
-    const [selectedItemCategoryId, setSelectedItemCategoryId] = useState(null)
+  const [selectedItemCategoryId, setSelectedItemCategoryId] = useState(null);
 
-    return (
-        <Article id={dataWrapper.uniqueId}
-                 type={Article.Types.SPACING_DEFAULT}
-                 dataWrapper={dataWrapper}
-                 className={`article-historical`}
-                 selectedItemCategoryId={selectedItemCategoryId}
-                 setSelectedItemCategoryId={setSelectedItemCategoryId}>
-            <ArticleHistoricalItems dataWrapper={dataWrapper} 
-                                   selectedItemCategoryId={selectedItemCategoryId}/>
-        </Article>
-    )
+  return (
+    <Article
+      id={dataWrapper.uniqueId}
+      type={Article.Types.SPACING_DEFAULT}
+      dataWrapper={dataWrapper}
+      className={`article-historical`}
+      selectedItemCategoryId={selectedItemCategoryId}
+      setSelectedItemCategoryId={setSelectedItemCategoryId}
+    >
+      <ArticleHistoricalItems
+        dataWrapper={dataWrapper}
+        selectedItemCategoryId={selectedItemCategoryId}
+      />
+    </Article>
+  );
 }
 
 /**
@@ -31,16 +35,17 @@ function ArticleHistorical({ dataWrapper, id }) {
  * @constructor
  */
 function ArticleHistoricalItems({ dataWrapper, selectedItemCategoryId }) {
-    const filteredItems = dataWrapper.getOrderedItemsFilteredBy(selectedItemCategoryId)
+  const filteredItems = dataWrapper.getOrderedItemsFilteredBy(
+    selectedItemCategoryId,
+  );
 
-    return (
-        <div className={`article-historical-items`}>
-            {filteredItems.map((itemWrapper, key) => (
-                <ArticleHistoricalItem itemWrapper={itemWrapper} 
-                                      key={key}/>
-            ))}
-        </div>
-    )
+  return (
+    <div className={`article-historical-items`}>
+      {filteredItems.map((itemWrapper, key) => (
+        <ArticleHistoricalItem itemWrapper={itemWrapper} key={key} />
+      ))}
+    </div>
+  );
 }
 
 /**
@@ -49,11 +54,8 @@ function ArticleHistoricalItems({ dataWrapper, selectedItemCategoryId }) {
  * @constructor
  */
 function ArticleHistoricalItem({ itemWrapper }) {
-    return (
-        <div className={`article-historical-item`}>
-            {itemWrapper.id}
-        </div>
-    )
+  console.log(itemWrapper);
+  return <div className={`article-historical-item`}>{itemWrapper.id}</div>;
 }
 
-export default ArticleHistorical
+export default ArticleHistorical;
