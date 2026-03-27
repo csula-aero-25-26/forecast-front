@@ -19,6 +19,12 @@
       "faIcon": "fa-solid fa-arrows-turn-to-dots"
     },
     {
+      "id": "historical",
+      "categoryId": "showcase",
+      "jsonPath": "/data/sections/historical.json",
+      "faIcon": "fa-solid fa-arrows-turn-to-dots"
+    },
+    {
       "id": "compendium",
       "categoryId": "showcase",
       "jsonPath": "/data/sections/compendium.json",

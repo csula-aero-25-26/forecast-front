@@ -19,7 +19,7 @@ import ArticleDateRange from "/src/components/articles/ArticleDateRange.jsx";
 import ArticleChatBox from "/src/components/articles/ArticleChatBox.jsx";
 import ArticlePrediction from "/src/components/articles/ArticlePrediction.jsx";
 import ArticleOverride from "/src/components/articles/ArticleOverride.jsx";
-
+import ArticleHistorical from "/src/components/articles/ArticleHistorical.jsx"
 
 
 import ArticleCustom from "/src/components/articles/ArticleCustom.jsx";
@@ -65,7 +65,9 @@ SectionBody.ARTICLES = {
     ArticleChatBox,
     ArticlePrediction,
     ArticleOverride,
+    ArticleHistorical,
     ArticleCustom,
+    
 };
 
 
