@@ -20,7 +20,7 @@
       "items": [
         {
           "id": 1,
-          "label": "Repository",
+          "label": "Git Organization",
           "link": {
             "href": "https://github.com/csula-aero-25-26",
             "tooltipString": "see_on_github"
