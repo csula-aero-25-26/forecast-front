@@ -22,7 +22,7 @@
       "id": "historical",
       "categoryId": "showcase",
       "jsonPath": "/data/sections/historical.json",
-      "faIcon": "fa-solid fa-arrows-turn-to-dots"
+      "faIcon": "fa-solid fa-clock"
     },
     {
       "id": "compendium",
