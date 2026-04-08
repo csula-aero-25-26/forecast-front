@@ -17,7 +17,6 @@ export const getFrontFolderImages = () => {
     "/images/content/Back/Marco.jpg",
     "/images/content/Machine/Daniel H.jpg",
     "/images/content/Machine/Josh.png",
-    "/images/content/Machine/Rizza.jpg",
   ];
   return images;
 };
