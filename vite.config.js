@@ -10,7 +10,12 @@ export default defineConfig({
             '/api': {
                 target: 'http://localhost:8080',
                 changeOrigin: true,
-            }
+            },
+            '/gfz': {   // Fetch-service ground truths
+                target: 'http://localhost:5500',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/gfz/, ''),
+            },
         }
     },
     build: {
