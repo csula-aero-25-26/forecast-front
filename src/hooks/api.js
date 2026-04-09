@@ -42,35 +42,6 @@ function getModelBaseKey(modelId) {
   return modelId.replace(/_horizon_\d+$/i, "").trim() || modelId;
 }
 
-/**
- * Base URL for the fetch-service (GFZ F10.7). In dev, Vite proxies `/gfz` → fetch-service.
- * @return {String}
- */
-function getFetchServiceOrigin() {
-  const env = import.meta.env?.VITE_FETCH_SERVICE_URL;
-  if (typeof env === "string" && env.trim()) {
-    return env.replace(/\/$/, "");
-  }
-  return "/gfz";
-}
-
-/**
- * FastAPI / Pydantic style `detail` field (string, or validation object array).
- * @param {Object} errBody
- * @param {number} status
- * @return {String}
- */
-function messageFromErrorBody(errBody, status) {
-  const detail = errBody?.detail ?? errBody?.message;
-  if (typeof detail === "string") return detail;
-  if (Array.isArray(detail)) {
-    return detail
-      .map((e) => (e && typeof e === "object" && e.msg != null ? e.msg : String(e)))
-      .join("; ");
-  }
-  return `HTTP error! status: ${status}`;
-}
-
 const validators = {
   /**
    * @param {String} name
@@ -319,7 +290,7 @@ const handlers = {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(messageFromErrorBody(errorData, response.status));
+        throw new Error(errorData.detail || errorData.message || `HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -398,106 +369,13 @@ const handlers = {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(messageFromErrorBody(errorData, response.status));
+        throw new Error(errorData.detail || errorData.message || `HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
       return {
         success: true,
         data,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.message,
-      };
-    }
-  },
-
-  /**
-   * GFZ F10.7 history from fetch-service `GET /ground-truths`.
-   * Only one of `days`, `start_date`, or `solar_cycles`; default is `days=365`.
-   *
-   * @param {{ days?: number, start_date?: string, solar_cycles?: number }} [opts]
-   * @return {Promise<{success: boolean, data?: Array, error?: String}>}
-   */
-  getGroundTruths: async (opts = {}) => {
-    const { days, start_date, solar_cycles } = opts;
-
-    const hasDays = days != null && days !== "" && !Number.isNaN(Number(days));
-    const hasStart = typeof start_date === "string" && start_date.trim().length > 0;
-    const hasCycles =
-      solar_cycles != null && solar_cycles !== "" && !Number.isNaN(Number(solar_cycles));
-
-    const n = [hasDays, hasStart, hasCycles].filter(Boolean).length;
-    if (n > 1) {
-      return {
-        success: false,
-        error: "Use only one of days, start_date, or solar_cycles",
-      };
-    }
-
-    const params = new URLSearchParams();
-    if (n === 1) {
-      if (hasDays) params.set("days", String(Number(days)));
-      else if (hasStart) params.set("start_date", start_date.trim());
-      else params.set("solar_cycles", String(Number(solar_cycles)));
-    } else {
-      params.set("days", "365");
-    }
-
-    try {
-      const url = `${getFetchServiceOrigin()}/ground-truths?${params.toString()}`;
-      const response = await fetch(url, {
-        method: "GET",
-        headers: { Accept: "application/json" },
-      });
-
-      if (!response.ok) {
-        const errBody = await response.json().catch(() => ({}));
-        throw new Error(messageFromErrorBody(errBody, response.status));
-      }
-
-      const body = await response.json();
-      let rows;
-      if (Array.isArray(body)) rows = body;
-      else if (Array.isArray(body?.items)) rows = body.items;
-      else if (Array.isArray(body?.ground_truths)) rows = body.ground_truths;
-      else rows = [];
-
-      return { success: true, data: rows };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.message,
-      };
-    }
-  },
-
-  /**
-   * Prediction history for a model (Spring: GET /api/predictions/model/{modelId}/history).
-   * Returns rows with targetDate and predicted value.
-   * @param {String} modelId
-   * @return {Promise<{success: boolean, data?: Array<{targetDate: *, value: number}>, error?: String}>}
-   */
-  getPredictionHistory: async (modelId) => {
-    try {
-      const encoded = encodeURIComponent(modelId);
-      const response = await fetch(`/api/predictions/model/${encoded}/history`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return {
-        success: true,
-        data: Array.isArray(data) ? data : [],
       };
     } catch (error) {
       return {
