@@ -42,6 +42,23 @@ function getModelBaseKey(modelId) {
   return modelId.replace(/_horizon_\d+$/i, "").trim() || modelId;
 }
 
+/**
+ * FastAPI / Pydantic style `detail` field (string, or validation object array).
+ * @param {Object} errBody
+ * @param {number} status
+ * @return {String}
+ */
+function messageFromErrorBody(errBody, status) {
+  const detail = errBody?.detail ?? errBody?.message;
+  if (typeof detail === "string") return detail;
+  if (Array.isArray(detail)) {
+    return detail
+      .map((e) => (e && typeof e === "object" && e.msg != null ? e.msg : String(e)))
+      .join("; ");
+  }
+  return `HTTP error! status: ${status}`;
+}
+
 const validators = {
   /**
    * @param {String} name
@@ -290,7 +307,7 @@ const handlers = {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(messageFromErrorBody(errorData, response.status));
       }
 
       const data = await response.json();
@@ -369,13 +386,92 @@ const handlers = {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(messageFromErrorBody(errorData, response.status));
       }
 
       const data = await response.json();
       return {
         success: true,
         data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  },
+
+  /**
+   * GFZ F10.7 ground-truth history from Spring Boot `GET /api/ground-truths/get?days=N` (default 365).
+   * The backend proxies the fetch-service; the browser only talks to the same origin as other `/api` routes.
+   *
+   * @param {{ days?: number }} [opts]
+   * @return {Promise<{success: boolean, data?: Array, error?: String}>}
+   */
+  getGroundTruths: async (opts = {}) => {
+    const { days } = opts;
+    const hasDays = days != null && days !== "" && !Number.isNaN(Number(days));
+
+    const params = new URLSearchParams();
+    if (hasDays) params.set("days", String(Number(days)));
+
+    try {
+      const qs = params.toString();
+      const url = qs ? `/api/ground-truths/get?${qs}` : "/api/ground-truths/get";
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => ({}));
+        throw new Error(messageFromErrorBody(errBody, response.status));
+      }
+
+      const body = await response.json();
+      let rows;
+      if (Array.isArray(body)) rows = body;
+      else if (Array.isArray(body?.items)) rows = body.items;
+      else if (Array.isArray(body?.ground_truths)) rows = body.ground_truths;
+      else rows = [];
+
+      return { success: true, data: rows };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  },
+
+  /**
+   * Prediction history for a model (Spring: GET /api/predictions/model/{modelId}/history).
+   * Returns rows with targetDate and predicted value.
+   * @param {String} modelId
+   * @return {Promise<{success: boolean, data?: Array<{targetDate: *, value: number}>, error?: String}>}
+   */
+  getPredictionHistory: async (modelId) => {
+    try {
+      const encoded = encodeURIComponent(modelId);
+      const response = await fetch(`/api/predictions/model/${encoded}/history`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        data: Array.isArray(data) ? data : [],
       };
     } catch (error) {
       return {

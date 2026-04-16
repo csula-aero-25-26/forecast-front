@@ -1,13 +1,23 @@
 {
-"title": {
+  "title": {
     "locales": {
-        "en": {
-            "title_short": "Solar Flux - Historical Data",
-            "title_short_nav": "Solar Flux - Historical Data",
-            "title_long_prefix": "Historical",
-            "title_long": "Data"
-        }
+      "en": {
+        "title_short": "Historical",
+        "title_short_nav": "Solar Flux - Historical Data",
+        "title_long_prefix": "View",
+        "title_long": "Flux {{History}}"
+      }
     }
-}
-
+  },
+  "articles": [
+    {
+      "id": "historical-accuracy",
+      "component": "ArticleHistorical",
+      "locales": {
+        "en": {
+          "title": "Observed Flux and Model History"
+        }
+      }
+    }
+  ]
 }

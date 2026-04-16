@@ -1,1 +1,120 @@
 @import "/src/styles/extend.scss";
+
+.article-historical-content {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.article-historical-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--theme-texts);
+}
+
+.article-historical-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.article-historical-control-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.article-historical-label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--theme-texts);
+    border-bottom: 2px solid var(--theme-primary);
+    padding-bottom: 0.5rem;
+}
+
+.article-historical-select {
+    width: 100%;
+    max-width: 28rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--theme-standard-borders);
+    border-radius: 4px;
+    background-color: var(--theme-empty);
+    color: var(--theme-texts);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+        outline: none;
+        border-color: var(--theme-primary);
+        box-shadow: 0 0 0 2px rgba(255, 206, 0, 0.2);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    option {
+        padding: 0.5rem;
+        background-color: var(--theme-empty);
+        color: var(--theme-texts);
+    }
+}
+
+.article-historical-description {
+    margin-top: 0.75rem;
+    padding: 0.875rem 1rem;
+    background-color: var(--theme-boards-background);
+    border: 1px solid var(--theme-standard-borders);
+    border-radius: 6px;
+    border-left: 3px solid var(--theme-primary);
+}
+
+.article-historical-description-text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--theme-texts);
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.article-historical-error {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #c0392b;
+    background-color: rgba(192, 57, 43, 0.12);
+}
+
+.article-historical-error-text {
+    margin: 0;
+    color: var(--theme-texts);
+}
+
+.article-historical-empty {
+    color: var(--theme-texts);
+    opacity: 0.85;
+    margin: 1rem 0;
+}
+
+.article-historical-chart-wrap {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.article-historical-chart-status {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: var(--theme-texts);
+    opacity: 0.9;
+}
+
+.article-historical-footnote {
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--theme-texts);
+    opacity: 0.8;
+}
