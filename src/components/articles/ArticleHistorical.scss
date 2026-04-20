@@ -104,6 +104,27 @@
     margin-top: 0.5rem;
 }
 
+.article-historical-chart-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.article-historical-zoom-out {
+    white-space: nowrap;
+}
+
+.article-historical-chart-zoom-hint {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--theme-texts);
+    opacity: 0.85;
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+
 .article-historical-chart-status {
     margin: 0 0 0.75rem;
     font-size: 0.9rem;
