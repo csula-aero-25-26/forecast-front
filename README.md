@@ -2,18 +2,25 @@
 
 Webpage from modified template for CSULA X Aerospace Senior Design 2025-2026 – built with **React** and **Bootstrap 5**.
 
+<p align="center">
+  <img src="docs/assets/readme_load.gif" alt="Loading demo" />
+</p>
+
 
 ## Component Purpose 
-This project is part of the **CSULA Aerospace Senior Design Team (Fall 2025)**.  
+This project is part of the **CSULA Aerospace Senior Design Team (Fall 2025 - Spring 2026)**.  
 This repository is meant to work in tandem with the forecast-model and backend repositiories as their frontend page. Working to display data based on user input and formed into 7-day Solar Flux prediction graphs. 
 
 
 
 ## Getting Started
 
-0. Have Node.js installed on your machine
+0. Have Node.js installed on your machine | Follow the instructions found in forecast-back to run backend
+
 ```
-Google the most recent version and follow the installation wizard. 
+Google the most recent version and follow the installation wizard.
+
+While the raw webpage can be ran without it all functionality is tied to the backend.
 ```
 
 1. Clone the repo:
@@ -21,7 +28,7 @@ Google the most recent version and follow the installation wizard.
 git clone https://github.com/csula-aero-25-26/forecast-front
 ```
 
-2. Go to the project's root folder and use npm to install all required components:
+2. Go to the project's root folder (forecast-front) and use npm to install all required components:
 ```
 npm install
 ```
@@ -31,29 +38,49 @@ npm install
 npm run dev
 ```
 
+4.  Navigate to page 
+```
+ctrl+left click link in terminal (will require extra redirection)
+or go directly to the following: http://localhost:5173/react-portfolio-template/#overview 
+```
+* Current itteration runs at localhost as we did not reach deployment.
+
 ## Layout & Usage
 
 0. Sidepanel
-![](docs/assets/)
+<p align="center">
+  <img src="docs/assets/readme_panel.png" alt="Loading demo" />
+</p>
 
 1. Landing Page - Overview
-![](docs/assets/readme_overview.png) 
+<p align="center">
+  <img src="docs/assets/readme_overview.png" alt="Loading demo" />
+</p>
 
 2. Solar Flux - Predictions
-![](docs/assets/readme_prediction_corrected.png)
+<p align="center">
+  <img src="docs/assets/readme_prediction_corrected.png" alt="Loading demo" />
+</p>
 
 3. Solar Flux - Override 
-![](docs/assets/readme_override_corrected.png)
+<p align="center">
+  <img src="docs/assets/readme_override_corrected.png" alt="Loading demo" />
+</p>
 
 4. Solar Flux - Historical & Comparison
-![](docs/assets/readme_flux_history.png)
+<p align="center">
+  <img src="docs/assets/readme_flux_history.png" alt="Loading demo" />
+</p>
 
 5. Compendium
-![](docs/assets/readme_compendium_corrected.png)
+<p align="center">
+  <img src="docs/assets/readme_compendium_corrected.png" alt="Loading demo" />
+</p>
 
 6. Meet The Team
-![](docs/assets/readme_meet_the_team.png)
-
+<p align="center">
+  <img src="docs/assets/readme_meet_the_team.png" alt="Loading demo" />
+</p>
 
 ## Style Guide
 ![](docs/assets/readme_style_sheet.png) 
