@@ -31,26 +31,35 @@ npm install
 npm run dev
 ```
 
-## Layout
+## Layout & Usage
 
+0. Sidepanel
+![](docs/assets/)
 
-1. Landing Page
-[] 
+1. Landing Page - Overview
+![](docs/assets/readme_overview.png) 
 
-2. User Input
-[] 
+2. Solar Flux - Predictions
+![](docs/assets/readme_solar_flux_predictions.png)
 
-3. Model Visualization 
-[]
+3. Solar Flux - Override 
+![](docs/assets/readme_override.png)
 
-4. Meet The Team
-[]
+4. Solar Flux - Historical & Comparison
+![](docs/assets/readme_flux_history.png)
+
+5. Compendium
+![](docs/assets/readme_compendium.png)
+
+6. Meet The Team
+![](docs/assets/readme_meet_the_team.png)
+
 
 ## Style Guide
-![image alt](https://github.com/csula-aero-25-26/forecast-front/blob/8837715a8b3c95e9ecc6d2cbb798464e93b4cebf/docs/assets/readme_style_sheet.png)
+![](docs/assets/readme_style_sheet.png) 
 
 ## Webpage Diagram
-![image ale](https://github.com/csula-aero-25-26/forecast-front/blob/d656704f04aaa868208b7a6987be58de84b51ed7/docs/assets/readme_webpage_diagram.png) 
+![](docs/assets/readme_webpage_diagram.png) 
 
 ## About
 
