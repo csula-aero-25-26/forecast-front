@@ -15,7 +15,7 @@
       "component": "ArticleHistorical",
       "locales": {
         "en": {
-          "title": "Observed Flux and Model History"
+          "title": "Observed Flux and Prediction Comparison"
         }
       }
     }

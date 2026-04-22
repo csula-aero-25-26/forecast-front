@@ -465,7 +465,7 @@ function ArticleHistoricalContent() {
                     <div className="article-historical-controls">
                         <div className="article-historical-control-group">
                             <label htmlFor="historical-model-select" className="article-historical-label">
-                                View Obsereved (Ground Truths):
+                                View Observed (Ground Truths):
                             </label>
                             <select
                                 id="historical-model-select"
