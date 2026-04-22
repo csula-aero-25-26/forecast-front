@@ -40,7 +40,7 @@ npm run dev
 ![](docs/assets/readme_overview.png) 
 
 2. Solar Flux - Predictions
-![](docs/assets/readme_prediction.png)
+![](docs/assets/readme_prediction_corrected.png)
 
 3. Solar Flux - Override 
 ![](docs/assets/readme_override.png)
