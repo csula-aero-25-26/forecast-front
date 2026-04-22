@@ -51,36 +51,51 @@ or go directly to the following: http://localhost:5173/react-portfolio-template/
 <p align="center">
   <img src="docs/assets/readme_panel.png" alt="Loading demo" />
 </p>
+[Desc]
 
 1. Landing Page - Overview
 <p align="center">
   <img src="docs/assets/readme_overview.png" alt="Loading demo" />
 </p>
+[Desc]
 
 2. Solar Flux - Predictions
 <p align="center">
   <img src="docs/assets/readme_prediction_corrected.png" alt="Loading demo" />
 </p>
+[Desc]
 
 3. Solar Flux - Override 
 <p align="center">
   <img src="docs/assets/readme_override_corrected.png" alt="Loading demo" />
 </p>
+[Desc]
 
 4. Solar Flux - Historical & Comparison
 <p align="center">
   <img src="docs/assets/readme_flux_history.png" alt="Loading demo" />
 </p>
+[Desc]
 
 5. Compendium
 <p align="center">
   <img src="docs/assets/readme_compendium_corrected.png" alt="Loading demo" />
 </p>
+[Desc]
 
 6. Meet The Team
 <p align="center">
   <img src="docs/assets/readme_meet_the_team.png" alt="Loading demo" />
 </p>
+[Desc]
+
+## Active Development
+The following is written assuming Forecasting items have not yet been decoupled from Ryan Baliero's template.
+
+1. Creation of an article's .jsx and .scss file can be done automatically with the following
+```
+npm run resume:make:article Article[Name]
+```
 
 ## Style Guide
 ![](docs/assets/readme_style_sheet.png) 
