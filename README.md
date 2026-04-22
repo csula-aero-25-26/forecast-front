@@ -43,13 +43,13 @@ npm run dev
 ![](docs/assets/readme_prediction_corrected.png)
 
 3. Solar Flux - Override 
-![](docs/assets/readme_override.png)
+![](docs/assets/readme_override_corrected.png)
 
 4. Solar Flux - Historical & Comparison
 ![](docs/assets/readme_flux_history.png)
 
 5. Compendium
-![](docs/assets/readme_compendium.png)
+![](docs/assets/readme_compendium_corrected.png)
 
 6. Meet The Team
 ![](docs/assets/readme_meet_the_team.png)
