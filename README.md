@@ -15,30 +15,33 @@ This repository is meant to work in tandem with the forecast-model and backend r
 
 ## Getting Started
 
-0. Have Node.js installed on your machine | Follow the instructions found in forecast-back to run backend
+0. Have Node.js installed on your machine 
 
 ```
 Google the most recent version and follow the installation wizard.
+```
 
+1. Follow the instructions found in forecast-back to run backend
+```
 While the raw webpage can be ran without it all functionality is tied to the backend.
 ```
 
-1. Clone the repo:
+2. Clone the repo:
 ```
 git clone https://github.com/csula-aero-25-26/forecast-front
 ```
 
-2. Go to the project's root folder (forecast-front) and use npm to install all required components:
+3. Go to the project's root folder (forecast-front) and use npm to install all required components:
 ```
 npm install
 ```
 
-3. Launch the project in developer mode:
+4. Launch the project in developer mode:
 ```
 npm run dev
 ```
 
-4.  Navigate to page 
+5.  Navigate to page 
 ```
 ctrl+left click link in terminal (will require extra redirection)
 or go directly to the following: http://localhost:5173/react-portfolio-template/#overview 
