@@ -50,7 +50,7 @@ function NavProfileCard({ profile, expanded }) {
         const tokens = lower.split(/\s+/).filter(Boolean)
 
         if (lower.includes('advisor') || lower.includes('student members')) {
-            return '/images/content/ae.png'
+            return '/images/content/logo.png'
         }
 
         if (profile && profile.imageMap && Object.keys(profile.imageMap).length) {
@@ -109,12 +109,12 @@ function NavProfileCard({ profile, expanded }) {
 
     const currentImageSrc = currentDisplayedWord ? findImageForWord(currentDisplayedWord) : null
     const imageFallbacks = currentDisplayedWord ? (
-        currentImageSrc ? ["/images/content/ae.png"] : [
+        currentImageSrc ? ["/images/content/logo.png"] : [
             ...extensions.map(ext => `/images/content/${slugify(currentDisplayedWord)}/${slugify(currentDisplayedWord)}.${ext}`),
             ...extensions.map(ext => `/images/content/${slugify(currentDisplayedWord)}.${ext}`),
-            "/images/content/ae.png"
+            "/images/content/logo.png"
         ]
-    ) : ["/images/content/ae.png"]
+    ) : ["/images/content/logo.png"]
 
 
     const statusCircleVisible = Boolean(profile.statusCircleVisible)

@@ -50,7 +50,7 @@
       "items": [
         {
           "id": 1,
-          "img": "images/content/233176526.png",
+          "img": "images/content/logo.png",
           "locales": {
             "en": {
               "text": "<p>This project was created as a collaboration between {{CSULA}} and the {{Aerospace Corporation}}. Led by a student team in Fall 2025 - Spring 2026. The aim of the project was to develop a full stack application that complies with the critera set by Aerospace.</p> <p>Over the course of the academic year the students engaged in weekly meeetings both internally and with their advisor/liaisons to discuss progress and future plans. In accordance with course requirements and porofessinal standards, documentation was created a maintained throughtout the process.</p>"
