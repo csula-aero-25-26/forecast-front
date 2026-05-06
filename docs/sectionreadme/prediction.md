@@ -1,7 +1,7 @@
 # Component 1 - Prediction
 
 <p align="center">
-  <img src="docs/assets/readme_prediction_corrected.png" alt="Loading demo" />
+  <img src="/docs/assets/readme_prediction_corrected.png" alt="Loading demo" />
 </p>
 
 As will be noted in all components as well as the root readme, all sections are created in articles composed of a .jsx and .scss file.
