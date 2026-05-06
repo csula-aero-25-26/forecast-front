@@ -1,6 +1,6 @@
 # CSULA Aerospace Senior Design – F10.7 Solar Flux Forecasting
 
-Webpage from modified template for CSULA X Aerospace Senior Design 2025-2026 – built with **React** and **Bootstrap 5**.
+Webpage created from a modified template for the CSULA X Aerospace Senior Design Capstone Fall 2025 - Spring 2026. Built with **React** and **Bootstrap 5**.
 
 <p align="center">
   <img src="docs/assets/readme_load.gif" alt="Loading demo" />
@@ -50,34 +50,29 @@ or go directly to the following: http://localhost:5173/react-portfolio-template/
 
 ## Layout & Usage
 
-1. Landing & Sections
-Below is the landing page of our frontend split between light and dark modes. For information regarding the functionality of specific sections, navigated to through the sidebar, please refer to the table beneath the image.
+Below is the landing page of our frontend split between light and dark modes. For information regarding the functionality of specific sections, navigated to through the sidebar, please refer to the next section
 
 ![](docs/assets/readme_all.png)
+
+# Component Specifics
+<div align="center">
 
 | #    | Section                     | Overview                                                                |
 |------|-----------------------------|-------------------------------------------------------------------------|
 | 1    | Prediction                  | [See Page](./docs/sectionreadme/prediction.md)                          | 
 | 2    | Override                    | [See Page](./docs/sectionreadme/override.md)                            |   
 | 3    | Historical                  | [See Page](./docs/sectionreadme/historical.md)                          |  
-| 4    | Misc                        | [See Page](./docs/sectionreadme/misc.md)                                |  
+| 4    | Misc                        | [See Page](./docs/sectionreadme/misc.md)                                |
 
+</div>
 
 ## Active Development
 For specifics to each component's make-up please refer to the overviews in the table above. 
 
-The following is written assuming Forecasting items have not yet been decoupled from Ryan Baliero's template.
-
-1. Creation of an article's .jsx and .scss file can be done automatically with the following
-```
-npm run resume:make:article Article[Name]
-```
+Any general questions that may be tied to the original template, assuming the frontend has not yet been decoupled from it, can be redirected to the **[template repo](https://github.com/ryanbalieiro/react-portfolio-template/)** 
 
 ## Style Guide
 ![](docs/assets/readme_style_sheet.png) 
-
-## Webpage Diagram
-![](docs/assets/readme_webpage_diagram.png) 
 
 ## About
 
