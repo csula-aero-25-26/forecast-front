@@ -1,10 +1,11 @@
 # Component 1 - Prediction
+* As will be noted in all components as well as the root readme, all sections are created in articles composed of a .jsx and .scss file.
 
+An article component that allows users to run a solar flux prediction
 <p align="center">
   <img src="/docs/assets/readme_prediction_corrected.png" alt="Loading demo" />
 </p>
 
-As will be noted in all components as well as the root readme, all sections are created in articles composed of a .jsx and .scss file.
 
 ## Overview
 
