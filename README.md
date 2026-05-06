@@ -61,6 +61,8 @@ Below is the landing page of our frontend split between light and dark modes. Fo
 
 
 ## Active Development
+For specifics to each component's make-up please refer to the overviews in the table above. 
+
 The following is written assuming Forecasting items have not yet been decoupled from Ryan Baliero's template.
 
 1. Creation of an article's .jsx and .scss file can be done automatically with the following
