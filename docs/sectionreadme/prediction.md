@@ -22,12 +22,12 @@ The component is split into two layers:
 
 ## Features
 
-- **Dynamic model loading** — fetches the available model list from the backend on mount via `handlers.getModels()`. The first model and its first available horizon day are selected automatically.
-- **Per-model horizon selection** — the Horizon Days dropdown is driven by `available_horizon_days` on the selected model object, so options update automatically when the model changes.
-- **Model-to-horizon ID resolution** — uses `model_id_for_horizon` (a map on the model object) to resolve the exact model ID to submit for a given horizon before calling `handlers.makePrediction()`.
-- **Feature vector chart** — after a successful prediction, renders a Recharts `LineChart` of the F10.7 lag features ordered from greatest lag to least, with the predicted flux appended as the final point.
-- **Custom chart dots** — historical feature points render as yellow circles; the predicted flux point renders as a distinct orange star polygon to make it immediately identifiable.
-- **Inline error display** — API and validation errors surface in a styled banner inside the component without disrupting the parent layout.
+- **Dynamic model loading** - fetches the available model list from the backend on mount via `handlers.getModels()`. The first model and its first available horizon day are selected automatically.
+- **Per-model horizon selection** - the Horizon Days dropdown is driven by `available_horizon_days` on the selected model object, so options update automatically when the model changes.
+- **Model-to-horizon ID resolution** - uses `model_id_for_horizon` (a map on the model object) to resolve the exact model ID to submit for a given horizon before calling `handlers.makePrediction()`.
+- **Feature vector chart** - after a successful prediction, renders a Recharts `LineChart` of the F10.7 lag features ordered from greatest lag to least, with the predicted flux appended as the final point.
+- **Custom chart dots** - historical feature points render as yellow circles; the predicted flux point renders as a distinct orange star polygon to make it immediately identifiable.
+- **Inline error display** - API and validation errors surface in a styled banner inside the component without disrupting the parent layout.
 
 
 
@@ -78,17 +78,17 @@ Consumed via the `useApi` hook (`/src/hooks/api.js`):
 
 **`Model` object fields used:**
 
-- `model_key` — unique key, used as the `<select>` value
-- `description` — human-readable description (optional)
-- `available_horizon_days` — array of valid horizon integers for this model
-- `model_id_for_horizon` — map of `{ [horizonDays]: modelId }` used to resolve the exact model ID before submission
+- `model_key` - unique key, used as the `<select>` value
+- `description` - human-readable description (optional)
+- `available_horizon_days` - array of valid horizon integers for this model
+- `model_id_for_horizon` - map of `{ [horizonDays]: modelId }` used to resolve the exact model ID before submission
 
 **`PredictionResult` fields used:**
 
-- `predicted_flux` / `predictedValue` — the output value (both spellings handled)
-- `model_id` / `modelVersion` — echoed back for display
-- `horizon_days` — echoed back for display
-- `features` — key/value map of input features used to build the chart
+- `predicted_flux` / `predictedValue` - the output value (both spellings handled)
+- `model_id` / `modelVersion` - echoed back for display
+- `horizon_days` - echoed back for display
+- `features` - key/value map of input features used to build the chart
 
 
 
@@ -111,6 +111,6 @@ The `StandardButton` inside `.article-prediction-button-wrapper` is forced to `w
 
 ## Development Notes
 
-- **Dual field name support** — the result parser handles both snake_case (`predicted_flux`, `model_id`) and camelCase (`predictedValue`, `modelVersion`) to stay compatible with any backend serialization format in use. 
-- **Horizon defaults to `[1]`** — if a model returns an empty or missing `available_horizon_days`, the UI falls back to `[1]` rather than breaking. Ensure the backend always populates this field to avoid silent UX degradation.
-- **`model_id_for_horizon` is required for submission** — if this map is absent or the selected horizon is not a key in it, prediction is blocked with an inline error. This is intentional as a guard against sending an ambiguous model ID to the API.
+- **Dual field name support** - the result parser handles both snake_case (`predicted_flux`, `model_id`) and camelCase (`predictedValue`, `modelVersion`) to stay compatible with any backend serialization format in use. 
+- **Horizon defaults to `[1]`** - if a model returns an empty or missing `available_horizon_days`, the UI falls back to `[1]` rather than breaking. Ensure the backend always populates this field to avoid silent UX degradation.
+- **`model_id_for_horizon` is required for submission** - if this map is absent or the selected horizon is not a key in it, prediction is blocked with an inline error. This is intentional as a guard against sending an ambiguous model ID to the API.
