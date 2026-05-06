@@ -49,7 +49,15 @@ or go directly to the following: http://localhost:5173/react-portfolio-template/
 
 1. Landing & Sections
 Below is the landing page of our frontend split between light and dark modes. For information regarding the functionality of specific sections, navigated to through the sidebar, please refer to the table beneath the image.
+
 ![](docs/assets/readme_all.png)
+
+| #    | Section                     | Overview                                                                |
+|------|-----------------------------|-------------------------------------------------------------------------|
+| 1    | Prediction                  | [See Page](./docs/sectionreadme/prediction.md)                          | 
+| 2    | Override                    | [See Page](./docs/sectionreadme/override.md)                            |   
+| 3    | Historical                  | [See Page](./docs/sectionreadme/historical.md)                          |  
+| 4    | Misc                        | [See Page](./docs/sectionreadme/misc.md)                                |  
 
 
 ## Active Development
